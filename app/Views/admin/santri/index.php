@@ -38,8 +38,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data Kelas</h3>
-                            <a href="/kelas/tambah-kelas" class="btn btn-success float-right">Tambah Data</a>
+                            <h3 class="card-title">Data Santri</h3>
+                            <a href="/santri/tambah-santri" class="btn btn-success float-right">Tambah Data</a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">

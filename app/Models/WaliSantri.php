@@ -11,8 +11,11 @@ class WaliSantriModel extends Model
 
     protected $useAutoIncrement = true;
     protected $allowedFields = [
+        'id_user',
+        'nis',
         'id_admin',
         'nama_santri',
+        'jenis_kelamin',
         'tempat',
         'tanggal_lahir',
         'usia_santri',

@@ -31,7 +31,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Tambah Data Santri</h3>
                         </div>
-                        <form action="/kelas/tambah-kelas" method="POST" enctype="multipart/form-data">
+                        <form action="/santri/tambah-santri" method="POST" enctype="multipart/form-data">
                             <?= csrf_field() ?>
                             <div class="card-body">
                                 <div class="form-group">

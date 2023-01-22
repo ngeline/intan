@@ -10,15 +10,15 @@ class WaliSantri extends BaseController
     protected $walisantriModel;
     public function __construct()
     {
-        $this->WaliSantriModel = new walisantriModel();
+        $this->walisantriModel = new WaliSantriModel();
     }
     public function index()
     {
         $data = [
             'title' => 'WaliSantri',
-            'WaliSantri' => $this->WaliSantriModel->findAll()
+            'walisantri' => $this->walisantriModel->findAll()
         ];
-        return view('admin/walisantri/index');
+        return view('admin/walisantri/index', $data);
     }
 
     public function create()
@@ -27,7 +27,7 @@ class WaliSantri extends BaseController
             'title' => 'Tambah WaliSantri',
             'validation'    => \Config\Services::validation()
         ];
-        return view('admin/WaliSantri/tambah', $data);
+        return view('admin/walisantri/tambah', $data);
     }
 
     public function store()
@@ -44,10 +44,10 @@ class WaliSantri extends BaseController
             // $validation = \Config\Services::validation();
             session()->setFlashdata('error', 'Failed to adding data!');
             // return redirect()->to(base_url('/komik/edit/'.$this->request->getVar('slug')))->withInput()->with('validation', $validation);
-            return redirect()->to(base_url('/kelas/tambah-kelas'))->withInput();
+            return redirect()->to(base_url('/walisantri/tambah-walisantri'))->withInput();
         };
 
-        $this->WaliSantriModel->save([
+        $this->walisantriModel->save([
             'id_admin'      => $this->request->getVar('id_admin'),
             'nama_wali'    => $this->request->getVar('nama_wali')
         ]);
@@ -61,7 +61,7 @@ class WaliSantri extends BaseController
     {
         $data = [
             'title' => 'Detail Wali Santri',
-            'walisantri' => $this->WaliSantriModel->find($id),
+            'walisantri' => $this->walisantriModel->find($id),
             'validation'    => \Config\Services::validation()
         ];
 
@@ -75,8 +75,8 @@ class WaliSantri extends BaseController
 
     public function update($id)
     {
-        $walisantri = $this->WaliSantriModel->find($id);
-        if($walisantri['nama_wali'] != $this->request->getVar('nama_kelas')){
+        $walisantri = $this->walisantriModel->find($id);
+        if($walisantri['nama_wali'] != $this->request->getVar('nama_wali')){
             $validate_nama = 'required';
         }else{
             $validate_nama = 'required';
@@ -93,10 +93,10 @@ class WaliSantri extends BaseController
             // $validation = \Config\Services::validation();
             session()->setFlashdata('error', 'Failed to adding data!');
             // return redirect()->to(base_url('/komik/edit/'.$this->request->getVar('slug')))->withInput()->with('validation', $validation);
-            return redirect()->to(base_url('/kelas/edit/'.$id))->withInput();
+            return redirect()->to(base_url('/walisantri/edit/'.$id))->withInput();
         };
 
-        $this->WaliSantriModel->update($id, [
+        $this->walisantriModel->update($id, [
             'id_admin'      => $this->request->getVar('id_admin'),
             'nama_wali'    => $this->request->getVar('nama_wali')
         ]);
@@ -108,9 +108,9 @@ class WaliSantri extends BaseController
 
     public function delete($id)
     {
-        $walisantri = $this->WaliSantriModel->find($id);
+        $walisantri = $this->walisantriModel->find($id);
         if($walisantri){
-            $this->WaliSantriModel->delete($id);
+            $this->walisantriModel->delete($id);
             session()->setFlashdata('success-delete', 'Berhasil Hapus data!');
             return redirect()->to('/walisantri');
         }else{
