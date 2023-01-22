@@ -6,12 +6,12 @@
         <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-            <h1 class="m-0 text-dark">SPP</h1>
+            <h1 class="m-0 text-dark">Kelas</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active">SPP</li>
+                <li class="breadcrumb-item active">Kelas</li>
             </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -29,14 +29,14 @@
                 <div class="col-md-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">SPP</h3>
+                            <h3 class="card-title">General</h3>
                         </div>
-                        <form action="/kelas/update/<?= $spp['id_spp'] ?>" method="POST" enctype="multipart/form-data">
+                        <form action="/kelas/update/<?= $kelas['id_kelas'] ?>" method="POST" enctype="multipart/form-data">
                             <?= csrf_field() ?>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="inputName">ID SPP</label>
-                                    <input type="text" id="id_spp" class="form-control" name="id_spp" value="<?= $spp['id_spp'] ?>" readonly>
+                                    <label for="inputName">ID Kelas</label>
+                                    <input type="text" id="id_kelas" class="form-control" name="id_kelas" value="<?= $kelas['id_kelas'] ?>" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">ID Admin</label>
