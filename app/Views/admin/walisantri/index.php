@@ -46,19 +46,12 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>ID User</th>
                                     <th>NIS</th>
-                                    <th>ID Admin</th>
                                     <th>Nama Santri</th>
-                                    <th>Tempat</th>
-                                    <th>Tanggal Lahir</th>
+                                    <th>TTL</th>
                                     <th>Usia Santri</th>
                                     <th>Alamat</th>
-                                    <th>Nama Ayah</th>
-                                    <th>Nama Ibu</th>
                                     <th>No Telp</th>
-                                    <th>Pekerjaan Ayah</th>
-                                    <th>Pekerjaan Ibu</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -83,19 +76,12 @@
                             <tfoot>
                                 <tr>
                                 <th>ID</th>
-                                    <th>ID User</th>
                                     <th>NIS</th>
-                                    <th>ID Admin</th>
                                     <th>Nama Santri</th>
-                                    <th>Tempat</th>
-                                    <th>Tanggal Lahir</th>
+                                    <th>TTL</th>
                                     <th>Usia Santri</th>
                                     <th>Alamat</th>
-                                    <th>Nama Ayah</th>
-                                    <th>Nama Ibu</th>
                                     <th>No Telp</th>
-                                    <th>Pekerjaan Ayah</th>
-                                    <th>Pekerjaan Ibu</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

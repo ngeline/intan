@@ -41,18 +41,24 @@ $routes->get('/santri', 'Santri::index');
 $routes->get('/wali-santri', 'WaliSantri::index');
 
 // Kelas
-$routes->get('/kelas', 'Kelas::index');
-$routes->get('/kelas/tambah-kelas', 'Kelas::create');
-$routes->post('/kelas/tambah-kelas', 'Kelas::store');
-$routes->get('/kelas/(:num)', 'Kelas::edit/$1');
-$routes->post('/kelas/update/(:num)', 'Kelas::update/$1');
-$routes->delete('/kelas/(:num)', 'kelas::delete/$1');
+$routes->group('kelas', static function($routes){
+    $routes->get('/', 'Kelas::index');
+    $routes->get('/tambah-kelas', 'Kelas::create');
+    $routes->post('/tambah-kelas', 'Kelas::store');
+    $routes->get('/(:num)', 'Kelas::edit/$1');
+    $routes->post('/update/(:num)', 'Kelas::update/$1');
+    $routes->delete('/(:num)', 'kelas::delete/$1');
+});
 
 // SPP
-$routes->get('/sumbangan-pembinaan-pendidikan', 'SPP::index');
+$routes->group('sumbangan-pembinaan-pendidikan', static function($routes){
+    $routes->get('/', 'SPP::index');
+});
 
 // User
-$routes->get('/kelola-user', 'User::index');
+$routes->group('user', static function($routes){
+    $routes->get('/', 'User::index');
+});
 
 /*
  * --------------------------------------------------------------------

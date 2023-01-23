@@ -6,7 +6,7 @@
         <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Santri</h1>
+                <h1 class="m-0 text-dark">Santri</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -20,7 +20,6 @@
 
     <section class="content">
         <div class="container-fluid">
-            <div class="row">
             <?php if(session()->getFlashdata('success')){  ?>
                 <div class="alert alert-primary" role="alert">
                     <?= session()->getFlashdata('success') ?>
