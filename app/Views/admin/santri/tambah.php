@@ -36,7 +36,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="inputName">ID Admin</label>
-                                    <input type="text" id="id_admin" class="form-control" name="id_admin" placeholder="ID Admin" value="<?= old('id_admin') ? old('id_admin') : 2 ?>" readonly>
+                                    <input type="text" id="id_admin" class="form-control" name="id_admin" placeholder="ID Admin" value="<?= old('id_admin') ? old('id_admin') : $id_admin ?>" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">Nama Santri</label>
@@ -49,11 +49,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">Jenis Kelamin</label>
-                                    <input type="text" id="jenis_kelamin" class="form-control" name="jenis_kelamin" value="<?= $santri['jenis_kelamin'] ?>" readonly>
+                                    <input type="text" id="jenis_kelamin" class="form-control" name="jenis_kelamin" value="<?= old('jenis_kelamin') ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">Status Santri</label>
-                                    <input type="text" id="status_santri" class="form-control" name="status_santri" value="<?= $santri['id_admin'] ?>" readonly>
+                                    <input type="text" id="status_santri" class="form-control" name="status_santri" value="<?= old('id_admin') ?>">
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success btn-block">Simpan</button>

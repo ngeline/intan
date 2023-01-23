@@ -38,7 +38,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Data Santri</h3>
-                            <a href="/santri/tambah-santri" class="btn btn-success float-right">Tambah Data</a>
+                            <a href="/santri/tambah" class="btn btn-success float-right">Tambah Data</a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">

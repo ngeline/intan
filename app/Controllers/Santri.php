@@ -3,13 +3,15 @@
 namespace App\Controllers;
 
 use App\Models\SantriModel;
+use App\Models\AdminModel;
 
 class Santri extends BaseController
 {
-    protected $santriModel;
+    protected $santriModel, $adminModel;
     public function __construct()
     {
         $this->santriModel = new SantriModel();
+        $this->adminModel = new AdminModel();
     }
     public function index()
     {
@@ -22,9 +24,11 @@ class Santri extends BaseController
 
     public function create()
     {
+        $id_admin = $this->adminModel->where('id_user', user_id())->first();
         $data = [
-            'title' => 'Tambah Santri',
-            'validation'    => \Config\Services::validation()
+            'title'         => 'Tambah Santri',
+            'validation'    => \Config\Services::validation(),
+            'id_admin'      => $id_admin['id_admin']
         ];
         return view('admin/santri/tambah', $data);
     }

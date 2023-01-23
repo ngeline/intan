@@ -29,30 +29,46 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Login::index');
+$routes->get('/', static function(){
+    return redirect()->route('dashboard');
+});
 
 // Dashboard
-$routes->get('/dashboard', 'Dashboard::index');
+$routes->get('/dashboard', 'Dashboard::index', ['as' => 'dashboard']);
 
 // Santri
-$routes->get('/santri', 'Santri::index');
+$routes->group('santri', static function($routes){
+    $routes->get('', 'Santri::index');
+    $routes->get('tambah', 'Santri::create');
+    $routes->post('tambah', 'Santri::store');
+    $routes->get('(:num)', 'Santri::edit/$1');
+    $routes->get('update/(:num)', 'Santri::update/$1');
+    $routes->delete('(:num)', 'Santri::delete/$1');
+});
 
 // Wali Santri
-$routes->get('/wali-santri', 'WaliSantri::index');
+$routes->group('wali-santri', static function($routes){
+    $routes->get('', 'WaliSantri::index');
+    $routes->get('tambah', 'WaliSantri::create');
+    $routes->post('tambah', 'WaliSantri::store');
+    $routes->get('(:num)', 'WaliSantri::edit/$1');
+    $routes->get('update/(:num)', 'WaliSantri::update/$1');
+    $routes->delete('(:num)', 'WaliSantri::delete/$1');
+});
 
 // Kelas
 $routes->group('kelas', static function($routes){
-    $routes->get('/', 'Kelas::index');
-    $routes->get('/tambah-kelas', 'Kelas::create');
-    $routes->post('/tambah-kelas', 'Kelas::store');
-    $routes->get('/(:num)', 'Kelas::edit/$1');
-    $routes->post('/update/(:num)', 'Kelas::update/$1');
-    $routes->delete('/(:num)', 'kelas::delete/$1');
+    $routes->get('', 'Kelas::index');
+    $routes->get('tambah-kelas', 'Kelas::create');
+    $routes->post('tambah-kelas', 'Kelas::store');
+    $routes->get('(:num)', 'Kelas::edit/$1');
+    $routes->post('update/(:num)', 'Kelas::update/$1');
+    $routes->delete('(:num)', 'kelas::delete/$1');
 });
 
 // SPP
 $routes->group('sumbangan-pembinaan-pendidikan', static function($routes){
-    $routes->get('/', 'SPP::index');
+    $routes->get('', 'SPP::index');
 });
 
 // User
