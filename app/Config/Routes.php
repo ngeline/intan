@@ -40,9 +40,9 @@ $routes->get('/dashboard', 'Dashboard::index', ['as' => 'dashboard']);
 $routes->group('santri', static function($routes){
     $routes->get('', 'Santri::index');
     $routes->get('tambah', 'Santri::create');
-    $routes->post('tambah', 'Santri::store');
+    $routes->post('tambah-santri', 'Santri::store');
     $routes->get('(:num)', 'Santri::edit/$1');
-    $routes->get('update/(:num)', 'Santri::update/$1');
+    $routes->post('update/(:num)', 'Santri::update/$1');
     $routes->delete('(:num)', 'Santri::delete/$1');
 });
 

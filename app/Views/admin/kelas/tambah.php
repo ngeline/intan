@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/template') ?>
+<?= $this->extend('layouts/template'); ?>
 
 <?= $this->section('content') ?>
 <div class="content-wrapper">
@@ -36,14 +36,14 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="inputName">ID Admin</label>
-                                    <input type="text" id="id_admin" class="form-control" name="id_admin" placeholder="ID Admin" value="<?= old('id_admin') ? old('id_admin') : 2 ?>" readonly>
+                                    <input type="text" id="id_admin" class="form-control" name="id_admin" placeholder="ID Admin" value="<?= old('id_admin') ? old('id_admin') : $id_admin ?>" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">Nama Kelas</label>
                                     <input type="text" id="nama_kelas" class="form-control <?= ($validation->hasError('nama_kelas') ? 'is-invalid' : ''); ?>" name="nama_kelas" placeholder="Nama Kelas" value="<?= old('nama_kelas') ?>" >
                                     <?php if($validation->hasError('nama_kelas')){ ?>
                                         <div class="invalid-feedback">
-                                            <?=  $validation->getError('nama_kelas'); ?>
+                                            <?php  $validation->getError('nama_kelas'); ?>
                                         </div>
                                     <?php } ?>
                                 </div>

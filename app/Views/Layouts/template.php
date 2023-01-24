@@ -41,7 +41,7 @@
 <!-- jQuery -->
 <script src="<?= base_url('assets/plugins/jquery/jquery.min.js') ?>"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="<?= base_url('assets/plugins/jquery-ui/jquery-ui.min.js')?>"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
@@ -52,9 +52,6 @@
 <script src="<?= base_url('assets/plugins/chart.js/Chart.min.js') ?>"></script>
 <!-- Sparkline -->
 <script src="<?= base_url('assets/plugins/sparklines/sparkline.js') ?>"></script>
-<!-- JQVMap -->
-<script src="<?= base_url('assets/plugins/jqvmap/jquery.vmap.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/jqvmap/maps/jquery.vmap.usa.js') ?>"></script>
 <!-- jQuery Knob Chart -->
 <script src="<?= base_url('assets/plugins/jquery-knob/jquery.knob.min.js') ?>"></script>
 <!-- daterangepicker -->
@@ -75,6 +72,9 @@
 <!-- DataTables -->
 <script src="<?= base_url('assets/plugins/datatables/jquery.dataTables.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js') ?>"></script>
+<!-- Select2 -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <!-- page script -->
 <script>
   $(function () {

@@ -4,14 +4,16 @@ namespace App\Controllers;
 
 use App\Models\SantriModel;
 use App\Models\AdminModel;
+use App\Models\KelasModel;
 
 class Santri extends BaseController
 {
-    protected $santriModel, $adminModel;
+    protected $santriModel, $adminModel, $kelasModel;
     public function __construct()
     {
         $this->santriModel = new SantriModel();
         $this->adminModel = new AdminModel();
+        $this->kelasModel = new KelasModel();
     }
     public function index()
     {
@@ -28,7 +30,8 @@ class Santri extends BaseController
         $data = [
             'title'         => 'Tambah Santri',
             'validation'    => \Config\Services::validation(),
-            'id_admin'      => $id_admin['id_admin']
+            'id_admin'      => $id_admin['id_admin'],
+            'kelas'         => $this->kelasModel->findAll()
         ];
         return view('admin/santri/tambah', $data);
     }
@@ -36,23 +39,48 @@ class Santri extends BaseController
     public function store()
     {
         if(!$this->validate([
-            'nama_santri'    => [
-                'rules'         => 'required|is_unique[santri.nama_santri]',
+            'nis'       => [
+                'rules'         => 'required',
                 'errors'        => [
-                    'required'  => '{field} harus diisi!',
-                    'is_unique' => '{filed} sudah tersedia!'
+                    'required'      => 'NIS Santri Harus Diisi!'
+                ]
+            ],
+            'nama_santri'       => [
+                'rules'         => 'required',
+                'errors'        => [
+                    'required'      => 'Nama Santri Harus Diisi!'
+                ]
+            ],
+            'jenis_kelamin'     => [
+                'rules'         => 'required',
+                'errors'        => [
+                    'required'  => 'Jenis Kelamin Harus Dipilih!'
+                ]
+                ],
+            'id_kelas'             => [
+                'rules'         => 'required',
+                'errors'        => [
+                    'required'  => 'Kelas Harus Dipilih!'
+                ]
+                ],
+            'status_santri'     => [
+                'rules'         => 'required',
+                'errors'        => [
+                    'required'  => 'Status Santri Harus Diisi!'
                 ]
             ]
         ])){
-            // $validation = \Config\Services::validation();
             session()->setFlashdata('error', 'Failed to adding data!');
-            // return redirect()->to(base_url('/santri/edit/'.$this->request->getVar('slug')))->withInput()->with('validation', $validation);
-            return redirect()->to(base_url('/santri/tambah-santri'))->withInput();
+            return redirect()->to(base_url('/santri/tambah'))->withInput();
         };
 
         $this->santriModel->save([
+            'nis'           => $this->request->getVar('nis'),
             'id_admin'      => $this->request->getVar('id_admin'),
-            'nama_santri'    => $this->request->getVar('nama_santri')
+            'id_kelas'      => $this->request->getVar('id_kelas'),
+            'nama_santri'   => $this->request->getVar('nama_santri'),
+            'jenis_kelamin' => $this->request->getVar('jenis_kelamin'),
+            'status_santri' => $this->request->getVar('status_santri')
         ]);
 
         session()->setFlashdata('success', 'Berhasil Tambah data!');
@@ -60,59 +88,80 @@ class Santri extends BaseController
         return redirect()->to('/santri');
     }
 
-    public function edit($id)
+    public function edit($nis)
     {
         $data = [
             'title' => 'Detail Santri',
-            'kelas' => $this->santriModel->find($id),
+            'santri' => $this->santriModel->where('nis', $nis)->first(),
+            'kelas'         => $this->kelasModel->findAll(),
             'validation'    => \Config\Services::validation()
         ];
 
         // When Komik Not Found
         if(empty($data['santri'])){
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Santri dengan Id = '.$id.' Tidak Ditemukan!');
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Santri dengan Id = '.$nis.' Tidak Ditemukan!');
         }
 
-        return view('admin/santri/detail', $data);
+        return view('admin/santri/edit', $data);
     }
 
-    public function update($id)
+    public function update($nis)
     {
-        $santri = $this->santriModel->find($id);
-        if($santri['nama_santri'] != $this->request->getVar('nama_santri')){
-            $validate_nama = 'required';
-        }else{
-            $validate_nama = 'required';
-        }
         if(!$this->validate([
-            'nama_santri'    => [
-                'rules'         => $validate_nama,
+            'nis'       => [
+                'rules'         => 'required',
                 'errors'        => [
-                    'required'  => '{field} harus diisi!',
-                    'is_unique' => '{filed} sudah tersedia!'
+                    'required'      => 'NIS Santri Harus Diisi!'
+                ]
+            ],
+            'nama_santri'       => [
+                'rules'         => 'required',
+                'errors'        => [
+                    'required'      => 'Nama Santri Harus Diisi!'
+                ]
+            ],
+            'jenis_kelamin'     => [
+                'rules'         => 'required',
+                'errors'        => [
+                    'required'  => 'Jenis Kelamin Harus Dipilih!'
+                ]
+                ],
+            'id_kelas'             => [
+                'rules'         => 'required',
+                'errors'        => [
+                    'required'  => 'Kelas Harus Dipilih!'
+                ]
+                ],
+            'status_santri'     => [
+                'rules'         => 'required',
+                'errors'        => [
+                    'required'  => 'Status Santri Harus Diisi!'
                 ]
             ]
         ])){
-            // $validation = \Config\Services::validation();
             session()->setFlashdata('error', 'Failed to adding data!');
-            // return redirect()->to(base_url('/santri/edit/'.$this->request->getVar('slug')))->withInput()->with('validation', $validation);
-            return redirect()->to(base_url('/santri/edit/'.$id))->withInput();
+            return redirect()->to(base_url('/santri/tambah'))->withInput();
         };
 
-        $this->santriModel->update($id, [
+        $this->santriModel->update($nis, [
+            'nis'           => $this->request->getVar('nis'),
             'id_admin'      => $this->request->getVar('id_admin'),
-            'nama_santri'    => $this->request->getVar('nama_santri')
+            'id_kelas'      => $this->request->getVar('id_kelas'),
+            'nama_santri'   => $this->request->getVar('nama_santri'),
+            'jenis_kelamin' => $this->request->getVar('jenis_kelamin'),
+            'status_santri' => $this->request->getVar('status_santri')
         ]);
 
         session()->setFlashdata('success', 'Berhasil Edit data!');
 
         return redirect()->to('/santri');
     }
-    public function delete($id)
+
+    public function delete($nis)
     {
-        $santri = $this->santriModel->find($id);
+        $santri = $this->santriModel->where('nis', $nis)->find();
         if($santri){
-            $this->santriModel->delete($id);
+            $this->santriModel->delete($nis);
             session()->setFlashdata('success-delete', 'Berhasil Hapus data!');
             return redirect()->to('/santri');
         }else{

@@ -3,17 +3,20 @@
 namespace App\Controllers;
 
 use App\Models\KelasModel;
+use App\Models\AdminModel;
 
 class Kelas extends BaseController
 {
-    protected $kelasModel;
+    protected $kelasModel, $adminModel;
     public function __construct()
     {
         $this->kelasModel = new KelasModel();
+        $this->adminModel = new AdminModel();
     }
 
     public function index()
     {
+        $id_admin = $this->adminModel->where('id_user', user_id())->first();
         $data = [
             'title' => 'Kelas',
             'kelas' => $this->kelasModel->findAll()
@@ -23,8 +26,10 @@ class Kelas extends BaseController
 
     public function create()
     {
+        $id_admin = $this->adminModel->where('id_user', user_id())->first();
         $data = [
             'title' => 'Tambah Kelas',
+            'id_admin' => $id_admin['id_admin'],
             'validation'    => \Config\Services::validation()
         ];
         return view('admin/kelas/tambah', $data);
@@ -59,9 +64,11 @@ class Kelas extends BaseController
 
     public function edit($id)
     {
+        $id_admin = $this->adminModel->where('id_user', user_id())->first();
         $data = [
-            'title' => 'Detail Komik',
-            'kelas' => $this->kelasModel->find($id),
+            'title'     => 'Detail Komik',
+            'kelas'     => $this->kelasModel->find($id),
+            'id_admin'  => $id_admin,
             'validation'    => \Config\Services::validation()
         ];
 

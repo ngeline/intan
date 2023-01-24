@@ -45,7 +45,7 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID Santri</th>
+                                    <th>No</th>
                                     <th>NIS</th>
                                     <th>Nama Santri</th>
                                     <th>Jenis Kelamin</th>
@@ -59,10 +59,13 @@
                                 foreach($santri as $data): ?>
                                 <tr>
                                     <th scope="row"><?= $no++ ?></th>
+                                    <td><?= $data['nis'] ?></td>
                                     <td><?= $data['nama_santri'] ?></td>
+                                    <td><?= $data['jenis_kelamin'] ?></td>
+                                    <td><?= $data['status_santri'] ?></td>
                                     <td>
-                                        <a href="santri/<?= $data['id_santri']?>" class="btn btn-sm btn-success">Detail</a>
-                                        <form action="/santri/<?= $data['id_santri'] ?>" method="post" class="d-inline">
+                                        <a href="santri/<?= $data['nis']?>" class="btn btn-sm btn-success">Edit</a>
+                                        <form action="/santri/<?= $data['nis'] ?>" method="post" class="d-inline">
                                             <?= csrf_field(); ?>
                                             <input type="hidden" name="_method" value="DELETE">
                                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Anda Yakin Menghapus Data Ini?')">Delete</button>

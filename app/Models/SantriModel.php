@@ -7,12 +7,16 @@ use CodeIgniter\Model;
 class SantriModel extends Model
 {
     protected $table = 'santri';
-    protected $primaryKey = 'id_santri';
+    protected $primaryKey = 'nis';
 
-    protected $useAutoIncrement = true;
+    protected $useAutoIncrement = false;
     protected $allowedFields = [
+        'nis',
+        'id_kelas',
         'id_admin',
-        'nama_santri'
+        'nama_santri',
+        'jenis_kelamin',
+        'status_santri'
     ];
 
     protected $useTimestamps = true;
