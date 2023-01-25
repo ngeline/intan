@@ -34,46 +34,46 @@ $routes->get('/', static function(){
 });
 
 // Dashboard
-$routes->get('/dashboard', 'Dashboard::index', ['as' => 'dashboard']);
+$routes->get('/dashboard', 'Dashboard::index', ['as' => 'dashboard'], ['role:admin']);
 
 // Santri
 $routes->group('santri', static function($routes){
-    $routes->get('', 'Santri::index');
-    $routes->get('tambah', 'Santri::create');
-    $routes->post('tambah-santri', 'Santri::store');
-    $routes->get('(:num)', 'Santri::edit/$1');
-    $routes->post('update/(:num)', 'Santri::update/$1');
-    $routes->delete('(:num)', 'Santri::delete/$1');
+    $routes->get('', 'Santri::index', ['role:admin']);
+    $routes->get('tambah', 'Santri::create', ['role:admin']);
+    $routes->post('tambah-santri', 'Santri::store', ['role:admin']);
+    $routes->get('(:num)', 'Santri::edit/$1', ['role:admin']);
+    $routes->post('update/(:num)', 'Santri::update/$1', ['role:admin']);
+    $routes->delete('(:num)', 'Santri::delete/$1', ['role:admin']);
 });
 
 // Wali Santri
 $routes->group('wali-santri', static function($routes){
-    $routes->get('', 'WaliSantri::index');
-    $routes->get('tambah', 'WaliSantri::create');
-    $routes->post('tambah', 'WaliSantri::store');
-    $routes->get('(:num)', 'WaliSantri::edit/$1');
-    $routes->get('update/(:num)', 'WaliSantri::update/$1');
-    $routes->delete('(:num)', 'WaliSantri::delete/$1');
+    $routes->get('', 'WaliSantri::index', ['role:admin']);
+    $routes->get('tambah', 'WaliSantri::create', ['role:admin']);
+    $routes->post('tambah', 'WaliSantri::store', ['role:admin']);
+    $routes->get('(:num)', 'WaliSantri::edit/$1', ['role:admin']);
+    $routes->get('update/(:num)', 'WaliSantri::update/$1', ['role:admin']);
+    $routes->delete('(:num)', 'WaliSantri::delete/$1', ['role:admin']);
 });
 
 // Kelas
 $routes->group('kelas', static function($routes){
-    $routes->get('', 'Kelas::index');
-    $routes->get('tambah-kelas', 'Kelas::create');
-    $routes->post('tambah-kelas', 'Kelas::store');
-    $routes->get('(:num)', 'Kelas::edit/$1');
-    $routes->post('update/(:num)', 'Kelas::update/$1');
-    $routes->delete('(:num)', 'kelas::delete/$1');
+    $routes->get('', 'Kelas::index', ['role:admin']);
+    $routes->get('tambah-kelas', 'Kelas::create', ['role:admin']);
+    $routes->post('tambah-kelas', 'Kelas::store', ['role:admin']);
+    $routes->get('(:num)', 'Kelas::edit/$1', ['role:admin']);
+    $routes->post('update/(:num)', 'Kelas::update/$1', ['role:admin']);
+    $routes->delete('(:num)', 'kelas::delete/$1', ['role:admin']);
 });
 
 // SPP
 $routes->group('sumbangan-pembinaan-pendidikan', static function($routes){
-    $routes->get('', 'SPP::index');
+    $routes->get('', 'SPP::index', ['role:admin']);
 });
 
 // User
 $routes->group('user', static function($routes){
-    $routes->get('/', 'User::index');
+    $routes->get('/', 'User::index', ['role:admin']);
 });
 
 /*

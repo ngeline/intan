@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Log in</title>
+  <title>Login Web Pondok</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -28,27 +28,48 @@
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Masuk terlebih dahulu untuk mengakses aplikasi</p>
+      <?= view('Myth\Auth\Views\_message_block') ?>
+      <form action="<?= url_to('login') ?>" method="post">
+      <?= csrf_field() ?>
 
-      <form action="" method="post">
+      <?php if ($config->validFields === ['email']): ?>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Username" name="username">
+          <input type="text" class="form-control  <?php if (session('errors.login')) : ?>is-invalid<?php endif ?>" placeholder="Email" name="login">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
             </div>
           </div>
+          <div class="invalid-feedback">
+            <?= session('errors.login') ?>
+          </div>
         </div>
+      <?php else: ?>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="text" class="form-control <?php if (session('errors.login')) : ?>is-invalid<?php endif ?>" placeholder="Username" name="login">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+          <div class="invalid-feedback">
+            <?= session('errors.login') ?>
+          </div>
+        </div>
+      <?php endif; ?>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control <?php if (session('errors.password')) : ?>is-invalid<?php endif ?>" placeholder="Password" name="password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
+          <div class="invalid-feedback">
+            <?= session('errors.password') ?>
+          </div>
         </div>
         <div class="input-group mb-3">
-            <!-- <button type="submit" class="btn btn-primary btn-block">Masuk</button> -->
-            <a href="/dashboard" class="btn btn-primary btn-block">Masuk</a>
+            <button type="submit" class="btn btn-primary btn-block">Masuk</button>
         </div>
       </form>
     <!-- /.login-card-body -->

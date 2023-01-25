@@ -21,6 +21,7 @@
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
+        <?php if(in_groups('admin')): ?>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="<?= base_url('/dashboard') ?>" class="nav-link <?php if(base_url('dashboard')) {   echo "active";  }?>">
@@ -71,6 +72,7 @@
             </a>
           </li>
         </ul>
+        <?php endif;?>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
