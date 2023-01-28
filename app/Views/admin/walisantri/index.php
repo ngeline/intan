@@ -38,7 +38,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Data Wali Santri</h3>
-                            <a href="/walisantri/tambah-walisantri" class="btn btn-success float-right">Tambah Data</a>
+                            <a href="<?= url_to('create.walisantri') ?>" class="btn btn-success float-right">Tambah Data</a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
