@@ -1,4 +1,3 @@
-
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
@@ -24,7 +23,7 @@
         <?php if(in_groups('admin')): ?>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="<?= base_url('/dashboard') ?>" class="nav-link <?php if(base_url('dashboard')) {   echo "active";  }?>">
+            <a href="<?= base_url('/dashboard') ?>" class="nav-link <?php if(url_is('dashboard')):?> active <?php endif; ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Dashboard
@@ -32,46 +31,51 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?= base_url('/santri') ?>" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="<?= base_url('/santri') ?>" class="nav-link <?php if(url_is('santri') || url_is('santri/*')):?> active <?php endif; ?>">
+              <i class="nav-icon fas fa-users"></i>
               <p>
                 Santri
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?= base_url('/wali-santri') ?>" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="<?= base_url('/wali-santri') ?>" class="nav-link <?php if(url_is('wali-santri') || url_is('wali-santri/*')):?> active <?php endif; ?>">
+              <i class="nav-icon fas fa-person-booth"></i>
               <p>
                 Wali Santri
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?= base_url('/kelas') ?>" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="<?= base_url('/kelas') ?>" class="nav-link <?php if(url_is('kelas') || url_is('kelas/*')):?> active <?php endif; ?>">
+              <i class="nav-icon fas fa-hotel"></i>
               <p>
                 Kelas
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?= base_url('/sumbangan-pembinaan-pendidikan') ?>" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="<?= base_url('/sumbangan-pembinaan-pendidikan') ?>" class="nav-link <?php if(url_is('sumbangan-pembinaan-pendidikan') || url_is('sumbangan-pembinaan-pendidikan/*')):?> active <?php endif; ?>">
+              <i class="nav-icon fas fa-dollar-sign"></i>
               <p>
                 SPP
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?= base_url('/user') ?>" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="<?= base_url('/user') ?>" class="nav-link <?php if(url_is('user') || url_is('user/*')):?> active <?php endif; ?>">
+              <i class="nav-icon fas fa-user"></i>
               <p>
                 User
               </p>
             </a>
           </li>
         </ul>
+        <?php endif;?>
+        <?php if(in_groups('wali santri')): ?>
+          <ul class="nav nav-pills nav-sidebar flex-column"  data-widget="treeview" role="menu" data-accordion="false">
+
+          </ul>
         <?php endif;?>
       </nav>
       <!-- /.sidebar-menu -->

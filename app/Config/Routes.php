@@ -34,46 +34,46 @@ $routes->get('/', static function(){
 });
 
 // Dashboard
-$routes->get('/dashboard', 'Dashboard::index', ['as' => 'dashboard'], ['role:admin']);
+$routes->get('/dashboard', 'Dashboard::index', ['as' => 'dashboard', 'filter' => 'role:wali santri, admin']);
 
 // Santri
 $routes->group('santri', static function($routes){
-    $routes->get('', 'Santri::index', ['role:admin']);
-    $routes->get('tambah', 'Santri::create', ['role:admin']);
-    $routes->post('tambah-santri', 'Santri::store', ['role:admin']);
-    $routes->get('(:num)', 'Santri::edit/$1', ['role:admin']);
-    $routes->post('update/(:num)', 'Santri::update/$1', ['role:admin']);
-    $routes->delete('(:num)', 'Santri::delete/$1', ['role:admin']);
+    $routes->get('', 'Santri::index', ['filter' => 'role:admin', 'as' => 'santri']);
+    $routes->get('tambah', 'Santri::create', ['filter' => 'role:admin', 'as' => 'create.santri']);
+    $routes->post('tambah-santri', 'Santri::store', ['filter' => 'role:admin', 'as' => 'store.santri']);
+    $routes->get('(:num)', 'Santri::edit/$1', ['filter' => 'role:admin', 'as' => 'edit.santri']);
+    $routes->post('update/(:num)', 'Santri::update/$1', ['filter' => 'role:admin', 'as' => 'update.santri']);
+    $routes->delete('(:num)', 'Santri::delete/$1', ['filter' => 'role:admin', 'as' => 'delete.santri']);
 });
 
 // Wali Santri
 $routes->group('wali-santri', static function($routes){
-    $routes->get('', 'WaliSantri::index', ['role:admin']);
-    $routes->get('tambah', 'WaliSantri::create', ['role:admin']);
-    $routes->post('tambah', 'WaliSantri::store', ['role:admin']);
-    $routes->get('(:num)', 'WaliSantri::edit/$1', ['role:admin']);
-    $routes->get('update/(:num)', 'WaliSantri::update/$1', ['role:admin']);
-    $routes->delete('(:num)', 'WaliSantri::delete/$1', ['role:admin']);
+    $routes->get('', 'WaliSantri::index', ['filter' => 'role:admin', 'as' => 'walisantri']);
+    $routes->get('tambah-walisantri', 'WaliSantri::create', ['filter' => 'role:admin', 'as' => 'create.walisantri']);
+    $routes->post('tambah', 'WaliSantri::store', ['filter' => 'role:admin', 'as' => 'store.walisantri']);
+    $routes->get('(:num)', 'WaliSantri::edit/$1', ['filter' => 'role:admin', 'as' => 'edit.walisantri']);
+    $routes->get('update/(:num)', 'WaliSantri::update/$1', ['filter' => 'role:admin', 'as' => 'update.walisantri']);
+    $routes->delete('(:num)', 'WaliSantri::delete/$1', ['filter' => 'role:admin', 'as' => 'delete.walisantri']);
 });
 
 // Kelas
 $routes->group('kelas', static function($routes){
-    $routes->get('', 'Kelas::index', ['role:admin']);
-    $routes->get('tambah-kelas', 'Kelas::create', ['role:admin']);
-    $routes->post('tambah-kelas', 'Kelas::store', ['role:admin']);
-    $routes->get('(:num)', 'Kelas::edit/$1', ['role:admin']);
-    $routes->post('update/(:num)', 'Kelas::update/$1', ['role:admin']);
-    $routes->delete('(:num)', 'kelas::delete/$1', ['role:admin']);
+    $routes->get('', 'Kelas::index', ['filter' => 'role:admin', 'as' => 'kelas']);
+    $routes->get('tambah-kelas', 'Kelas::create', ['filter' => 'role:admin', 'as' => 'create.kelas']);
+    $routes->post('tambah-kelas', 'Kelas::store', ['filter' => 'role:admin', 'as' => 'store.kelas']);
+    $routes->get('(:num)', 'Kelas::edit/$1', ['filter' => 'role:admin', 'as' => 'edit.kelas']);
+    $routes->post('update/(:num)', 'Kelas::update/$1', ['filter' => 'role:admin', 'as' => 'update.kelas']);
+    $routes->delete('(:num)', 'kelas::delete/$1', ['filter' => 'role:admin', 'as' => 'delete.kelas']);
 });
 
 // SPP
 $routes->group('sumbangan-pembinaan-pendidikan', static function($routes){
-    $routes->get('', 'SPP::index', ['role:admin']);
+    $routes->get('', 'SPP::index', ['filter' => 'role:admin', 'as' => 'spp']);
 });
 
 // User
 $routes->group('user', static function($routes){
-    $routes->get('/', 'User::index', ['role:admin']);
+    $routes->get('/', 'User::index', ['filter' => 'role:admin', 'as' => 'user']);
 });
 
 /*
