@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">Nama Wali Santri</label>
-                                    <input type="text" id="nama_walisantri" class="form-control  <?= ($validation->hasError('nama_walisantri')) ? 'is-invalid' : ''; ?>" name="nama_walisantri" placeholder="Nama Wali Santri" value="<?= old('nama_walisantri') ?>">
+                                    <input type="text" id="nama_walisantri" class="form-control <?= ($validation->hasError('nama_walisantri')) ? 'is-invalid' : ''; ?>" name="nama_walisantri" placeholder="Nama Wali Santri" value="<?= old('nama_walisantri') ?>">
                                     <?php if($validation->hasError('nama_walisantri')){ ?>
                                         <div class="invalid-feedback">
                                             <?=  $validation->getError('nama_walisantri'); ?>

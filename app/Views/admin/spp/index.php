@@ -37,8 +37,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data Santri</h3>
-                            <a href="/santri/tambah-santri" class="btn btn-success float-right">Tambah Data</a>
+                            <h3 class="card-title">Data SPP</h3>
+                            <a href="<?= url_to('create.spp') ?>" class="btn btn-success float-right">Tambah Data</a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -60,10 +60,14 @@
                                 foreach($spp as $data): ?>
                                 <tr>
                                     <th scope="row"><?= $no++ ?></th>
+                                    <td><?= $data['nis'] ?></td>
                                     <td><?= $data['nama_santri'] ?></td>
+                                    <td><?= $data['tanggal'] ?></td>
+                                    <td><?= $data['jumlah_iuran'] ?></td>
+                                    <td><?= $data['keterangan'] ?></td>
                                     <td>
-                                        <a href="santri/<?= $data['id_santri']?>" class="btn btn-sm btn-success">Detail</a>
-                                        <form action="/santri/<?= $data['id_santri'] ?>" method="post" class="d-inline">
+                                        <a href="<?= url_to('edit.spp', $data['id']) ?>" class="btn btn-sm btn-success">Detail</a>
+                                        <form action="<?= url_to('delete.spp', $data['id']) ?>" method="post" class="d-inline">
                                             <?= csrf_field(); ?>
                                             <input type="hidden" name="_method" value="DELETE">
                                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Anda Yakin Menghapus Data Ini?')">Delete</button>

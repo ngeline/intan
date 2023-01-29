@@ -12,7 +12,7 @@
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item">Sumbangan Pembinaan Pendidikan</li>
-                <li class="breadcrumb-item active">Tambah Data</li>
+                <li class="breadcrumb-item active">Edit Data</li>
             </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -32,19 +32,19 @@
                         <div class="card-header">
                             <h3 class="card-title">General</h3>
                         </div>
-                        <form action="<?= url_to('store.spp') ?>" method="POST" enctype="multipart/form-data">
+                        <form action="<?= url_to('update.spp', $spp['id']) ?>" method="POST" enctype="multipart/form-data">
                             <?= csrf_field() ?>
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="inputName">ID Admin</label>
-                                    <input type="text" id="id_admin" class="form-control" name="id_admin" placeholder="ID Admin" value="<?= old('id_admin') ? old('id_admin') : $id_admin ?>" readonly>
+                                    <input type="text" id="id_admin" class="form-control" name="id_admin" placeholder="ID Admin" value="<?= old('id_admin', $spp['id_admin']) ?>" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">NIS | Nama Santri</label>
                                     <select name="nis" id="nis" class="form-control <?= ($validation->hasError('nis')) ? 'is-invalid' : ''; ?>">
                                         <option value="" selected disabled class="text-center">PILIH SISWA</option>
                                         <?php foreach($santri as $row): ?>
-                                            <option value="<?= $row['nis'] ?>" <?= old('nis') ? 'selected' : '' ?>><?= $row['nis'].' | '.$row['nama_santri'] ?></option>
+                                            <option value="<?= $row['nis'] ?>" <?= old('nis', $spp['nis']) ? 'selected' : '' ?>><?= $row['nis'].' | '.$row['nama_santri'] ?></option>
                                         <?php endforeach;?>
                                     </select>
                                     <?php if($validation->hasError('nis')){ ?>
@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Tanggal Pembayaran</label>
-                                    <input type="date" name="tanggal" id="tanggal" class="form-control <?= ($validation->hasError('tanggal')) ? 'is-invalid' : ''; ?>" placeholder="Tanggal" value="<?= old('tanggal') ?>">
+                                    <input type="date" name="tanggal" id="tanggal" class="form-control <?= ($validation->hasError('tanggal')) ? 'is-invalid' : ''; ?>" placeholder="Tanggal" value="<?= old('tanggal', $spp['tanggal']) ?>">
                                     <?php if($validation->hasError('tanggal')){ ?>
                                         <div class="invalid-feedback">
                                             <?=  $validation->getError('tanggal'); ?>
@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Jumlah Iuran</label>
-                                    <input type="number" name="jumlah_iuran" id="jumlah_iuran" class="form-control <?= ($validation->hasError('tanggal')) ? 'is-invalid' : ''; ?>" placeholder="Jumlah Iuran" value="<?= old('jumlah_iuran') ?>">
+                                    <input type="number" name="jumlah_iuran" id="jumlah_iuran" class="form-control <?= ($validation->hasError('tanggal')) ? 'is-invalid' : ''; ?>" placeholder="Jumlah Iuran" value="<?= old('jumlah_iuran', $spp['jumlah_iuran']) ?>">
                                     <?php if($validation->hasError('jumlah_iuran')){ ?>
                                         <div class="invalid-feedback">
                                             <?=  $validation->getError('jumlah_iuran'); ?>
@@ -73,7 +73,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Keterangan</label>
-                                    <textarea name="keterangan" id="keterangan" cols="30" rows="10" class="form-control"><?= old('keterangan') ?></textarea>
+                                    <textarea name="keterangan" id="keterangan" cols="30" rows="10" class="form-control"><?= old('keterangan', $spp['keterangan']) ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success btn-block">Simpan</button>
