@@ -52,7 +52,7 @@ $routes->group('wali-santri', static function($routes){
     $routes->get('tambah-walisantri', 'WaliSantri::create', ['filter' => 'role:admin', 'as' => 'create.walisantri']);
     $routes->post('tambah', 'WaliSantri::store', ['filter' => 'role:admin', 'as' => 'store.walisantri']);
     $routes->get('(:num)', 'WaliSantri::edit/$1', ['filter' => 'role:admin', 'as' => 'edit.walisantri']);
-    $routes->get('update/(:num)', 'WaliSantri::update/$1', ['filter' => 'role:admin', 'as' => 'update.walisantri']);
+    $routes->post('update/(:num)', 'WaliSantri::update/$1', ['filter' => 'role:admin', 'as' => 'update.walisantri']);
     $routes->delete('(:num)', 'WaliSantri::delete/$1', ['filter' => 'role:admin', 'as' => 'delete.walisantri']);
 });
 

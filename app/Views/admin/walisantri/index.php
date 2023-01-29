@@ -46,8 +46,8 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>NIS</th>
-                                    <th>Nama Santri</th>
+                                    <th>NIS | Nama Santri</th>
+                                    <th>Nama Wali Santri</th>
                                     <th>TTL</th>
                                     <th>Usia Santri</th>
                                     <th>Alamat</th>
@@ -61,10 +61,15 @@
                                 foreach($walisantri as $data): ?>
                                 <tr>
                                     <th scope="row"><?= $no++ ?></th>
-                                    <td><?= $data['nama_wali'] ?></td>
+                                    <td><?= $data['nis'].' | '.$data['nama_santri'] ?></td>
+                                    <td><?= $data['nama_walisantri'] ?></td>
+                                    <td><?= $data['tempat'].', '.$data['tanggal_lahir'] ?></td>
+                                    <td><?= $data['usia_santri'].' Tahun' ?></td>
+                                    <td><?= $data['alamat'] ?></td>
+                                    <td><?= $data['no_telepon'] ?></td>
                                     <td>
-                                        <a href="walisantri/<?= $data['id_walisantri']?>" class="btn btn-sm btn-success">Detail</a>
-                                        <form action="/walisantri/<?= $data['id_walisantri'] ?>" method="post" class="d-inline">
+                                        <a href="<?= url_to('edit.walisantri', $data['id_walisantri']) ?>" class="btn btn-sm btn-success">Detail</a>
+                                        <form action="<?= url_to('delete.walisantri', $data['id_walisantri']) ?>" method="post" class="d-inline">
                                             <?= csrf_field(); ?>
                                             <input type="hidden" name="_method" value="DELETE">
                                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Anda Yakin Menghapus Data Ini?')">Delete</button>

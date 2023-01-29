@@ -7,14 +7,14 @@ use CodeIgniter\Model;
 class WaliSantriModel extends Model
 {
     protected $table = 'walisantri';
-    protected $primaryKey = 'id_walisantri';
+    protected $primaryKey = 'id';
 
     protected $useAutoIncrement = true;
     protected $allowedFields = [
         'id_user',
         'nis',
         'id_admin',
-        'nama_santri',
+        'nama_walisantri',
         'jenis_kelamin',
         'tempat',
         'tanggal_lahir',
