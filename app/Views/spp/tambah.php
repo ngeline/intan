@@ -6,7 +6,7 @@
         <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Kelas</h1>
+            <h1 class="m-0 text-dark">SPP</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -41,11 +41,17 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">NIS | Nama Santri</label>
-                                    <select name="nis" id="nis" class="form-control <?= ($validation->hasError('nis')) ? 'is-invalid' : ''; ?>">
+                                    <select name="nis" id="nis" class="form-control <?= ($validation->hasError('nis')) ? 'is-invalid' : ''; ?>" <?= ($u_group['group_id'] == 2) ? 'readonly' : '' ?>>
                                         <option value="" selected disabled class="text-center">PILIH SISWA</option>
-                                        <?php foreach($santri as $row): ?>
-                                            <option value="<?= $row['nis'] ?>" <?= old('nis') ? 'selected' : '' ?>><?= $row['nis'].' | '.$row['nama_santri'] ?></option>
-                                        <?php endforeach;?>
+                                        <?php if($u_group['group_id'] == 1) {?>
+                                            <?php foreach($santri as $row): ?>
+                                                <option value="<?= $row['nis'] ?>" <?= old('nis') ? 'selected' : '' ?>><?= $row['nis'].' | '.$row['nama_santri'] ?></option>
+                                            <?php endforeach;?>
+                                        <?php }else{?>
+                                            <?php foreach($santri as $row): ?>
+                                                <option value="<?= $row['nis'] ?>" <?= ($row['nis'] == $walisantri['nis']) ? 'selected' : '' ?>><?= $row['nis'].' | '.$row['nama_santri'] ?></option>
+                                            <?php endforeach;?>
+                                        <?php }?>
                                     </select>
                                     <?php if($validation->hasError('nis')){ ?>
                                         <div class="invalid-feedback">
@@ -88,3 +94,12 @@
     </section>
 </div>
 <?= $this->endSection() ?>
+<?php if($u_group['group_id'] == 1){?>
+    <?= $this->section('footer') ?>
+        <script>
+            $(document).ready(function() {
+                $('#jenis_kelamin').select2();
+            });
+        </script>
+    <?= $this->endSection() ?>
+<?php }?>

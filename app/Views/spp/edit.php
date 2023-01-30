@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">NIS | Nama Santri</label>
-                                    <select name="nis" id="nis" class="form-control <?= ($validation->hasError('nis')) ? 'is-invalid' : ''; ?>">
+                                    <select name="nis" id="nis" class="form-control <?= ($validation->hasError('nis')) ? 'is-invalid' : ''; ?>" <?= ($u_group['group_id'] == 2) ? 'readonly' : '' ?>>
                                         <option value="" selected disabled class="text-center">PILIH SISWA</option>
                                         <?php foreach($santri as $row): ?>
                                             <option value="<?= $row['nis'] ?>" <?= old('nis', $spp['nis']) ? 'selected' : '' ?>><?= $row['nis'].' | '.$row['nama_santri'] ?></option>

@@ -9,6 +9,6 @@ class User extends BaseController
         $data = [
             'title' => 'Kelola User'
         ];
-        return view('admin/user/index', $data);
+        return view('user/index', $data);
     }
 }

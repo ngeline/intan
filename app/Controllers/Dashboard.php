@@ -9,6 +9,6 @@ class Dashboard extends BaseController
         $data = [
             'title' => 'Dashboard Page'
         ];
-        return view('admin/dashboard/index', $data);
+        return view('dashboard/index', $data);
     }
 }

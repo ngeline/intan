@@ -5,37 +5,66 @@ namespace App\Controllers;
 use App\Models\SPPModel;
 use App\Models\AdminModel;
 use App\Models\SantriModel;
+use App\Models\UserGroupModel;
+use App\Models\WaliSantriModel;
 
 class SPP extends BaseController
 {
-    protected $sppModel, $adminModel, $santriModel;
+    protected $usergroup, $sppModel, $adminModel, $santriModel, $walisantri;
     public function __construct()
     {
+        $this->usergroup = new UserGroupModel();
         $this->sppModel = new SPPModel();
         $this->adminModel = new AdminModel();
         $this->santriModel = new SantriModel();
+        $this->walisantri = new WaliSantriModel();
     }
 
     public function index()
     {
-        $data = [
-            'title' => 'SPP',
-            'spp' => $this->sppModel->findAll()
-        ];
-        return view('admin/spp/index', $data);
+        $u_group = $this->usergroup->where('user_id', user_id())->first();
+        if($u_group['group_id'] == 1){
+            $data = [
+                'title' => 'SPP',
+                'spp' => $this->sppModel->findAll()
+            ];
+        }else{
+            $walisantri = $this->walisantri->where('id_user', user_id())->first();
+            $data = [
+                'title' => 'SPP',
+                'spp' => $this->sppModel->where('nis', $walisantri['nis'])->findAll()
+            ];
+        }
+        return view('spp/index', $data);
     }
 
     public function create()
     {
-        $id_admin = $this->adminModel->where('id_user', user_id())->first();
-        $santri = $this->santriModel->findAll();
-        $data = [
-            'title' => 'Tambah Wali Santri',
-            'validation'    => $this->validation,
-            'id_admin'      => $id_admin['id_admin'],
-            'santri'        => $santri
-        ];
-        return view('admin/spp/tambah', $data);
+        $u_group = $this->usergroup->where('user_id', user_id())->first();
+        if($u_group['group_id'] == 1){
+            $id_admin = $this->adminModel->where('id_user', user_id())->first();
+            $santri = $this->santriModel->findAll();
+            $data = [
+                'title' => 'Tambah Wali Santri',
+                'validation'    => $this->validation,
+                'id_admin'      => $id_admin['id_admin'],
+                'santri'        => $santri,
+                'u_group'       => $u_group
+            ];
+        }else{
+            $id_admin = $this->adminModel->where('nama', 'admin')->first();
+            $santri = $this->santriModel->findAll();
+            $walisantri = $this->walisantri->where('id_user', user_id())->first();
+            $data = [
+                'title' => 'Tambah Wali Santri',
+                'validation'    => $this->validation,
+                'id_admin'      => $id_admin['id_admin'],
+                'santri'        => $santri,
+                'walisantri'    => $walisantri,
+                'u_group'       => $u_group
+            ];
+        }
+        return view('spp/tambah', $data);
     }
 
     public function store()
@@ -92,19 +121,33 @@ class SPP extends BaseController
 
     public function edit($id)
     {
-        $data = [
-            'title' => 'Detail SPP Santri',
-            'spp' => $this->sppModel->find($id),
-            'santri'    => $this->santriModel->findAll(),
-            'validation'    => $this->validation
-        ];
+        $u_group = $this->usergroup->where('user_id', user_id())->first();
+        if($u_group['group_id'] == 1){
+            $data = [
+                'title' => 'Detail SPP Santri',
+                'spp' => $this->sppModel->find($id),
+                'santri'    => $this->santriModel->findAll(),
+                'validation'    => $this->validation,
+                'u_group'       => $u_group
+            ];
+        }else{
+            $walisantri = $this->walisantri->where('id_user', user_id())->first();
+            $data = [
+                'title' => 'Detail SPP Santri',
+                'spp' => $this->sppModel->find($id),
+                'santri'    => $this->santriModel->findAll(),
+                'walisantri'    => $walisantri,
+                'validation'    => $this->validation,
+                'u_group'       => $u_group
+            ];
+        }
 
-        // When Komik Not Found
+        // When SPP Not Found
         if(empty($data['spp'])){
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Kelas dengan Id = '.$id.' Tidak Ditemukan!');
         }
 
-        return view('admin/spp/edit', $data);
+        return view('spp/edit', $data);
     }
 
     public function update($id)

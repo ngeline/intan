@@ -21,7 +21,7 @@ class Kelas extends BaseController
             'title' => 'Kelas',
             'kelas' => $this->kelasModel->findAll()
         ];
-        return view('admin/kelas/index', $data);
+        return view('kelas/index', $data);
     }
 
     public function create()
@@ -32,7 +32,7 @@ class Kelas extends BaseController
             'id_admin' => $id_admin['id_admin'],
             'validation'    => \Config\Services::validation()
         ];
-        return view('admin/kelas/tambah', $data);
+        return view('kelas/tambah', $data);
     }
 
     public function store()
@@ -77,7 +77,7 @@ class Kelas extends BaseController
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Kelas dengan Id = '.$id.' Tidak Ditemukan!');
         }
 
-        return view('admin/kelas/detail', $data);
+        return view('kelas/detail', $data);
     }
 
     public function update($id)

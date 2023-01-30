@@ -68,17 +68,23 @@ $routes->group('kelas', static function($routes){
 
 // SPP
 $routes->group('sumbangan-pembinaan-pendidikan', static function($routes){
-    $routes->get('', 'SPP::index', ['filter' => 'role:admin', 'as' => 'spp']);
-    $routes->get('tambah-spp', 'SPP::create', ['filter' => 'role:admin', 'as' => 'create.spp']);
-    $routes->post('tambah-spp', 'SPP::store', ['filter' => 'role:admin', 'as' => 'store.spp']);
-    $routes->get('(:num)', 'SPP::edit/$1', ['filter' => 'role:admin', 'as' => 'edit.spp']);
-    $routes->post('update/(:num)', 'SPP::update/$1', ['filter' => 'role:admin', 'as' => 'update.spp']);
-    $routes->delete('(:num)', 'SPP::delete/$1', ['filter' => 'role:admin', 'as' => 'delete.spp']);
+    $routes->get('', 'SPP::index', ['filter' => 'role:admin,wali santri', 'as' => 'spp']);
+    $routes->get('tambah-spp', 'SPP::create', ['filter' => 'role:admin,wali santri', 'as' => 'create.spp']);
+    $routes->post('tambah-spp', 'SPP::store', ['filter' => 'role:admin,wali santri', 'as' => 'store.spp']);
+    $routes->get('(:num)', 'SPP::edit/$1', ['filter' => 'role:admin,wali santri', 'as' => 'edit.spp']);
+    $routes->post('update/(:num)', 'SPP::update/$1', ['filter' => 'role:admin,wali santri', 'as' => 'update.spp']);
+    $routes->delete('(:num)', 'SPP::delete/$1', ['filter' => 'role:admin,wali santri', 'as' => 'delete.spp']);
 });
 
 // User
 $routes->group('user', static function($routes){
     $routes->get('/', 'User::index', ['filter' => 'role:admin', 'as' => 'user']);
+});
+
+// Profile
+$routes->group('profile', static function($routes){
+    $routes->get('(:num)', 'Profile::index/$1', ['filter' => 'role:admin, wali santri', 'as' => 'profile']);
+    $routes->post('(:num)', 'Profile::update/$1', ['filter' => 'role:admin, wali santri', 'as' => 'update.profile']);
 });
 
 /*

@@ -21,7 +21,7 @@ class Santri extends BaseController
             'title' => 'Santri',
             'santri' => $this->santriModel->findAll()
         ];
-        return view('admin/santri/index', $data);
+        return view('santri/index', $data);
     }
 
     public function create()
@@ -33,7 +33,7 @@ class Santri extends BaseController
             'id_admin'      => $id_admin['id_admin'],
             'kelas'         => $this->kelasModel->findAll()
         ];
-        return view('admin/santri/tambah', $data);
+        return view('santri/tambah', $data);
     }
 
     public function store()
@@ -102,7 +102,7 @@ class Santri extends BaseController
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Santri dengan Id = '.$nis.' Tidak Ditemukan!');
         }
 
-        return view('admin/santri/edit', $data);
+        return view('santri/edit', $data);
     }
 
     public function update($nis)

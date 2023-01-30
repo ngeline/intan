@@ -6,6 +6,7 @@ use App\Models\WaliSantriModel;
 use App\Models\AdminModel;
 use App\Models\SantriModel;
 use App\Models\UserModelCustom;
+use App\Models\UserGroupModel;
 use \Myth\Auth\Password;
 
 class WaliSantri extends BaseController
@@ -18,6 +19,7 @@ class WaliSantri extends BaseController
         $this->santriModel = new SantriModel();
         $this->adminModel = new AdminModel();
         $this->user = new UserModelCustom();
+        $this->userGroup = new UserGroupModel();
         $this->db = db_connect();
     }
     public function index()
@@ -28,7 +30,7 @@ class WaliSantri extends BaseController
             'title' => 'WaliSantri',
             'walisantri' => $walisantri
         ];
-        return view('admin/walisantri/index', $data);
+        return view('walisantri/index', $data);
     }
 
     public function create()
@@ -41,7 +43,7 @@ class WaliSantri extends BaseController
             'id_admin'      => $id_admin['id_admin'],
             'santri'        => $santri
         ];
-        return view('admin/walisantri/tambah', $data);
+        return view('walisantri/tambah', $data);
     }
 
     public function store()
@@ -142,8 +144,14 @@ class WaliSantri extends BaseController
             ]);
         }
 
-
         $user = $this->user->where('email', $this->request->getVar('nama_walisantri').'@gmail.com')->first();
+
+        $u_group = [
+            'group_id'  => '2',
+            'user_id'   => $user['id']
+        ];
+
+        $this->userGroup->insert($u_group);
 
         $this->walisantriModel->save([
             'id_user'       => $user['id'],
@@ -181,7 +189,7 @@ class WaliSantri extends BaseController
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Data Kelas dengan Id = '.$id.' Tidak Ditemukan!');
         }
 
-        return view('admin/walisantri/edit', $data);
+        return view('walisantri/edit', $data);
     }
 
     public function update($id)
