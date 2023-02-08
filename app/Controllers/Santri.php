@@ -29,7 +29,7 @@ class Santri extends BaseController
         $id_admin = $this->adminModel->where('id_user', user_id())->first();
         $data = [
             'title'         => 'Tambah Santri',
-            'validation'    => \Config\Services::validation(),
+            'validation'    => $this->validation,
             'id_admin'      => $id_admin['id_admin'],
             'kelas'         => $this->kelasModel->findAll()
         ];
@@ -38,40 +38,34 @@ class Santri extends BaseController
 
     public function store()
     {
-        if(!$this->validate([
-            'nis'       => [
-                'rules'         => 'required',
-                'errors'        => [
-                    'required'      => 'NIS Santri Harus Diisi!'
-                ]
+        $this->validation->setRules([
+                'nis'               => 'required',
+                'nama_santri'       => 'required',
+                'jenis_kelamin'     => 'required',
+                'id_kelas'          => 'required',
+                'status_santri'     => 'required',    
             ],
-            'nama_santri'       => [
-                'rules'         => 'required',
-                'errors'        => [
-                    'required'      => 'Nama Santri Harus Diisi!'
-                ]
-            ],
-            'jenis_kelamin'     => [
-                'rules'         => 'required',
-                'errors'        => [
+            [ 
+                'nis'   => [
+                    'required' => 'NIS Harus Diisi!'
+                ],
+                'nama_santri' => [
+                    'required' => 'Nama Santri Harus Diisi!'
+                ],
+                'jenis_kelamin' => [
                     'required'  => 'Jenis Kelamin Harus Dipilih!'
-                ]
                 ],
-            'id_kelas'             => [
-                'rules'         => 'required',
-                'errors'        => [
+                'id_kelas'      => [
                     'required'  => 'Kelas Harus Dipilih!'
-                ]
                 ],
-            'status_santri'     => [
-                'rules'         => 'required',
-                'errors'        => [
+                'status_santri' => [
                     'required'  => 'Status Santri Harus Diisi!'
                 ]
             ]
-        ])){
-            session()->setFlashdata('error', 'Failed to adding data!');
-            return redirect()->to(base_url('/santri/tambah'))->withInput();
+        );
+        if(!$this->validation->withRequest($this->request)->run()){
+            session()->setFlashdata('error-header', 'Failed to adding data!');
+            return redirect()->back()->withInput()->with('error', $this->validation->getErrors());
         };
 
         $this->santriModel->save([
