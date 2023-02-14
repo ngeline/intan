@@ -37,19 +37,18 @@ class Kelas extends BaseController
 
     public function store()
     {
-        if(!$this->validate([
+        $this->validation->setRules([
             'nama_kelas'    => [
                 'rules'         => 'required|is_unique[kelas.nama_kelas]',
                 'errors'        => [
-                    'required'  => '{field} harus diisi!',
-                    'is_unique' => '{filed} sudah tersedia!'
+                    'required'  => 'Nama kelas harus diisi!',
+                    'is_unique' => 'Nama kelas sudah tersedia!'
                 ]
             ]
-        ])){
-            // $validation = \Config\Services::validation();
-            session()->setFlashdata('error', 'Failed to adding data!');
-            // return redirect()->to(base_url('/komik/edit/'.$this->request->getVar('slug')))->withInput()->with('validation', $validation);
-            return redirect()->to(base_url('/kelas/tambah-kelas'))->withInput();
+        ]);
+        if(!$this->validation->withRequest($this->request)->run()){
+            session()->setFlashdata('error-header', 'Failed to adding data!');
+            return redirect()->back()->withInput()->with('error', $this->validation->getErrors());
         };
 
         $this->kelasModel->save([
@@ -83,24 +82,17 @@ class Kelas extends BaseController
     public function update($id)
     {
         $kelas = $this->kelasModel->find($id);
-        if($kelas['nama_kelas'] != $this->request->getVar('nama_kelas')){
-            $validate_nama = 'required';
-        }else{
-            $validate_nama = 'required';
-        }
-        if(!$this->validate([
+        $this->validation->setRules([
             'nama_kelas'    => [
-                'rules'         => $validate_nama,
+                'rules'         => 'required',
                 'errors'        => [
-                    'required'  => '{field} harus diisi!',
-                    'is_unique' => '{filed} sudah tersedia!'
+                    'required'  => 'Nama kelas harus diisi!',
                 ]
             ]
-        ])){
-            // $validation = \Config\Services::validation();
-            session()->setFlashdata('error', 'Failed to adding data!');
-            // return redirect()->to(base_url('/komik/edit/'.$this->request->getVar('slug')))->withInput()->with('validation', $validation);
-            return redirect()->to(base_url('/kelas/edit/'.$id))->withInput();
+        ]);
+        if(!$this->validation->withRequest($this->request)->run()){
+            session()->setFlashdata('error-header', 'Failed to adding data!');
+            return redirect()->back()->withInput()->with('error', $this->validation->getErrors());
         };
 
         $this->kelasModel->update($id, [

@@ -69,39 +69,37 @@ class SPP extends BaseController
 
     public function store()
     {
-        $validate = $this->validate(
-            [
-                'nis'           => [
-                    'rules' => 'required',
-                    'errors' => [
-                        'required'  => 'NIS dan Nama Santri Harus Dipilih!'
-                    ]
-                ],
-                'tanggal'       => [
-                    'rules' => 'required',
-                    'errors'=> [
-                        'required' => 'Tanggal Iuran Harus Dipilih!'
-                    ]
-                ],
-                'jumlah_iuran'  => [
-                    'rules' => 'required',
-                    'errors'=> [
-                        'required' => 'Tanggal Iuran Harus Dipilih!'
-                    ]
-                ],
-                'keterangan'    => [
-                    'rules' => 'required',
-                    'errors'=> [
-                        'required'  => 'Keterangan Harus Diisi!'
-                    ]
+        $this->validation->setRules([
+            'nis'           => [
+                'rules' => 'required',
+                'errors' => [
+                    'required'  => 'NIS dan Nama Santri Harus Dipilih!'
+                ]
+            ],
+            'tanggal'       => [
+                'rules' => 'required',
+                'errors'=> [
+                    'required' => 'Tanggal Iuran Harus Dipilih!'
+                ]
+            ],
+            'jumlah_iuran'  => [
+                'rules' => 'required',
+                'errors'=> [
+                    'required' => 'Tanggal Iuran Harus Dipilih!'
+                ]
+            ],
+            'keterangan'    => [
+                'rules' => 'required',
+                'errors'=> [
+                    'required'  => 'Keterangan Harus Diisi!'
                 ]
             ]
-        );
-
-        if($validate == false){
-            session()->setFlashdata('error', 'Failed to adding data!');
-            return redirect()->back()->withInput()->with('validation', $this->validation->getErrors());
-        }
+        ]);
+        
+        if(!$this->validation->withRequest($this->request)->run()){
+            session()->setFlashdata('error-header', 'Failed to adding data!');
+            return redirect()->back()->withInput()->with('error', $this->validation->getErrors());
+        };
 
         $santri = $this->santriModel->where('nis', $this->request->getVar('nis'))->first();
 
@@ -152,39 +150,37 @@ class SPP extends BaseController
 
     public function update($id)
     {
-        $validate = $this->validate(
-            [
-                'nis'           => [
-                    'rules' => 'required',
-                    'errors' => [
-                        'required'  => 'NIS dan Nama Santri Harus Dipilih!'
-                    ]
-                ],
-                'tanggal'       => [
-                    'rules' => 'required',
-                    'errors'=> [
-                        'required' => 'Tanggal Iuran Harus Dipilih!'
-                    ]
-                ],
-                'jumlah_iuran'  => [
-                    'rules' => 'required',
-                    'errors'=> [
-                        'required' => 'Tanggal Iuran Harus Dipilih!'
-                    ]
-                ],
-                'keterangan'    => [
-                    'rules' => 'required',
-                    'errors'=> [
-                        'required'  => 'Keterangan Harus Diisi!'
-                    ]
+        $this->validation->setRules([
+            'nis'           => [
+                'rules' => 'required',
+                'errors' => [
+                    'required'  => 'NIS dan Nama Santri Harus Dipilih!'
+                ]
+            ],
+            'tanggal'       => [
+                'rules' => 'required',
+                'errors'=> [
+                    'required' => 'Tanggal Iuran Harus Dipilih!'
+                ]
+            ],
+            'jumlah_iuran'  => [
+                'rules' => 'required',
+                'errors'=> [
+                    'required' => 'Tanggal Iuran Harus Dipilih!'
+                ]
+            ],
+            'keterangan'    => [
+                'rules' => 'required',
+                'errors'=> [
+                    'required'  => 'Keterangan Harus Diisi!'
                 ]
             ]
-        );
-
-        if($validate == false){
-            session()->setFlashdata('error', 'Failed to adding data!');
-            return redirect()->back()->withInput()->with('validation', $this->validation->getErrors());
-        }
+        ]);
+        
+        if(!$this->validation->withRequest($this->request)->run()){
+            session()->setFlashdata('error-header', 'Failed to adding data!');
+            return redirect()->back()->withInput()->with('error', $this->validation->getErrors());
+        };
 
         $santri = $this->santriModel->where('nis', $this->request->getVar('nis'))->first();
 

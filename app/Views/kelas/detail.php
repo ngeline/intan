@@ -1,3 +1,8 @@
+<?php 
+    if(session()->getFlashdata('error') != null){
+        $err = session()->getFlashData('error');
+    }
+?>
 <?= $this->extend('layouts/template') ?>
 
 <?= $this->section('content') ?>
@@ -20,9 +25,9 @@
 
     <section class="content">
         <div class="container-fluid">
-            <?php if(session()->getFlashdata('error')){  ?>
+            <?php if(session()->getFlashdata('error-header')){  ?>
                 <div class="alert alert-danger" role="alert">
-                    <?= session()->getFlashdata('error') ?>
+                    <?= session()->getFlashdata('error-header') ?>
                 </div>
             <?php } ?>
             <div class="row">
@@ -31,23 +36,19 @@
                         <div class="card-header">
                             <h3 class="card-title">SPP</h3>
                         </div>
-                        <form action="/kelas/update/<?= $spp['id_spp'] ?>" method="POST" enctype="multipart/form-data">
+                        <form action="/kelas/update/<?= $kelas['id_kelas'] ?>" method="POST" enctype="multipart/form-data">
                             <?= csrf_field() ?>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="inputName">ID SPP</label>
-                                    <input type="text" id="id_spp" class="form-control" name="id_spp" value="<?= $spp['id_spp'] ?>" readonly>
-                                </div>
-                                <div class="form-group">
                                     <label for="inputName">ID Admin</label>
-                                    <input type="text" id="id_admin" class="form-control" name="id_admin" value="<?= $kelas['id_admin'] ?>" readonly>
+                                    <input type="text" id="id_admin" class="form-control" name="id_admin" placeholder="ID Admin" value="<?= old('id_admin') ? old('id_admin') : $kelas['id_admin'] ?>" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">Nama Kelas</label>
-                                    <input type="text" id="nama_kelas" class="form-control <?= ($validation->hasError('nama_kelas') ? 'is-invalid' : ''); ?>" name="nama_kelas" value="<?= $kelas['nama_kelas'] ?>">
-                                    <?php if($validation->hasError('nama_kelas')){ ?>
+                                    <input type="text" id="nama_kelas" class="form-control <?= isset($err['nama_kelas']) ? $err['nama_kelas'] ? 'is-invalid' : '' : ''; ?>" name="nama_kelas" placeholder="Nama Kelas" value="<?= old('nama_kelas', $kelas['nama_kelas']) ?>" >
+                                    <?php  if(isset($err['nama_kelas'])){  ?>
                                         <div class="invalid-feedback">
-                                            <?=  $validation->getError('nama_kelas'); ?>
+                                            <?=  $err['nama_kelas']; ?>
                                         </div>
                                     <?php } ?>
                                 </div>

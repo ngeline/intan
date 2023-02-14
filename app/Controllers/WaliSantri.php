@@ -48,7 +48,7 @@ class WaliSantri extends BaseController
 
     public function store()
     {
-        if(!$this->validate([
+        $this->validation->setRules([
             'nama_walisantri'    => [
                 'rules'         => 'required',
                 'errors'        => [
@@ -121,13 +121,13 @@ class WaliSantri extends BaseController
                     'required'  => 'Nomor Telepon Wali Santri harus diisi!'
                 ]
                 ],
-        ])){
-            session()->setFlashdata('error', 'Failed to adding data!');
-            // return redirect()->to(base_url('wali-santri/tambah-walisantri'))->withInput()->with('validation', $validation);
-            return redirect()->back()->withInput();
+        ]);
+        if(!$this->validation->withRequest($this->request)->run()){
+            session()->setFlashdata('error-header', 'Failed to adding data!');
+            return redirect()->back()->withInput()->with('error', $this->validation->getErrors());
         };
 
-        $checkUser = $this->user->where('username', $this->request->getVar('nama_walisantri'))->first();
+        $checkUser = $this->user->where('username', $this->request->getVar('nama_walisantri'))->get();
         if(!$checkUser){
             $this->user->save([
                 'email'     => $this->request->getVar('nama_walisantri').'@gmail.com',
@@ -135,6 +135,7 @@ class WaliSantri extends BaseController
                 'password_hash'  => Password::hash('walisantri')
             ]);
         }else{
+            $checkUser = $checkUser->getResultArray();
             $countUser = count($checkUser);
             $countUser += 1;
             $this->user->save([
@@ -169,6 +170,12 @@ class WaliSantri extends BaseController
             'pekerjaan_ayah'            => $this->request->getVar('pekerjaan_ayah'),
             'pekerjaan_ibu'            => $this->request->getVar('pekerjaan_ibu'),
         ]);
+        
+        if ($this->db->transStatus() === false) {
+            $this->db->transRollback();
+        } else {
+            $this->db->transCommit();
+        }
 
         session()->setFlashdata('success', 'Berhasil Tambah data!');
 
@@ -196,84 +203,83 @@ class WaliSantri extends BaseController
     {
         $walisantri = $this->walisantriModel->find($id);
 
-        if(!$this->validate([
+        $this->validation->setRules([
             'nama_walisantri'    => [
                 'rules'         => 'required',
                 'errors'        => [
                     'required'  => 'Nama Wali Santri harus diisi!'
                 ]
-            ],
+                ],
             'nis'    => [
                 'rules'         => 'required',
                 'errors'        => [
                     'required'  => 'NIS Santri harus dipilih!'
                 ]
-            ],
+                ],
             'jenis_kelamin'    => [
                 'rules'         => 'required',
                 'errors'        => [
                     'required'  => 'Jenis Kelamin Santri harus diisi!'
                 ]
-            ],
+                ],
             'tempat'    => [
                 'rules'         => 'required',
                 'errors'        => [
                     'required'  => 'Tempat Lahir Santri harus diisi!'
                 ]
-            ],
+                ],
             'tanggal_lahir'    => [
                 'rules'         => 'required',
                 'errors'        => [
                     'required'  => 'Tanggal Lahir Santri harus diisi!'
                 ]
-            ],
+                ],
             'usia_santri'    => [
                     'rules'         => 'required',
                     'errors'        => [
                         'required'  => 'Usia Santri harus diisi!'
                     ]
-            ],
+                    ],
             'alamat'    => [
                 'rules'         => 'required',
                 'errors'        => [
                     'required'  => 'Alamat Santri harus diisi!'
                 ]
-            ],
+                ],
             'nama_ayah'    => [
                 'rules'         => 'required',
                 'errors'        => [
                     'required'  => 'Nama Ayah Santri harus diisi!'
                 ]
-            ],
+                ],
             'pekerjaan_ayah'    => [
                 'rules'         => 'required',
                 'errors'        => [
                     'required'  => 'Pekerjaan Ayah Santri harus diisi!'
                 ]
-            ],
+                ],
             'nama_ibu'    => [
                 'rules'         => 'required',
                 'errors'        => [
                     'required'  => 'Nama Ibu Santri harus diisi!'
                 ]
-            ],
+                ],
             'pekerjaan_ibu'    => [
                 'rules'         => 'required',
                 'errors'        => [
                     'required'  => 'Pekerjaan Ibu Santri harus diisi!'
                 ]
-            ],
+                ],
             'no_telepon'    => [
                 'rules'         => 'required',
                 'errors'        => [
                     'required'  => 'Nomor Telepon Wali Santri harus diisi!'
                 ]
-            ]
-        ])){
-            // $validation = \Config\Services::validation();
-            session()->setFlashdata('error', 'Failed to adding data!');
-            // return redirect()->to(base_url('/komik/edit/'.$this->request->getVar('slug')))->withInput()->with('validation', $validation);
-            return redirect()->to(base_url('/walisantri/edit/'.$id))->withInput();
+                ],
+        ]);
+        if(!$this->validation->withRequest($this->request)->run()){
+            session()->setFlashdata('error-header', 'Failed to edit data!');
+            return redirect()->back()->withInput()->with('error', $this->validation->getErrors());
         };
 
         $this->user->update($walisantri['id_user'], [

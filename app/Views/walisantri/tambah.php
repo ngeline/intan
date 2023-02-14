@@ -1,4 +1,8 @@
-
+<?php 
+    if(session()->getFlashdata('error') != null){
+        $err = session()->getFlashData('error');
+    }
+?>
 <?= $this->extend('layouts/template') ?>
 
 <?= $this->section('content') ?>
@@ -21,9 +25,9 @@
 
     <section class="content">
         <div class="container-fluid">
-            <?php if(session()->getFlashdata('error')){  ?>
+            <?php if(session()->getFlashdata('error-header')){  ?>
                 <div class="alert alert-danger" role="alert">
-                    <?= session()->getFlashdata('error') ?>
+                    <?= session()->getFlashdata('error-header') ?>
                 </div>
             <?php } ?>
             <div class="row">
@@ -41,118 +45,118 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">Nama Wali Santri</label>
-                                    <input type="text" id="nama_walisantri" class="form-control <?= ($validation->hasError('nama_walisantri')) ? 'is-invalid' : ''; ?>" name="nama_walisantri" placeholder="Nama Wali Santri" value="<?= old('nama_walisantri') ?>">
-                                    <?php if($validation->hasError('nama_walisantri')){ ?>
+                                    <input type="text" id="nama_walisantri" class="form-control <?= isset($err['nama_walisantri']) ? $err['nama_walisantri'] ? 'is-invalid' : '' : ''; ?>" name="nama_walisantri" placeholder="Nama Wali Santri" value="<?= old('nama_walisantri') ?>">
+                                    <?php  if(isset($err['nama_walisantri'])){  ?>
                                         <div class="invalid-feedback">
-                                            <?=  $validation->getError('nama_walisantri'); ?>
+                                            <?=  $err['nama_walisantri']; ?>
                                         </div>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">NIS Santri</label>
-                                    <select name="nis" id="nis" class="form-control <?= ($validation->hasError('nis') ? 'is-invalid' : ''); ?>">
+                                    <select name="nis" id="nis" class="form-control <?= isset($err['nis']) ? $err['nis'] ? 'is-invalid' : '' : ''; ?>">
                                         <option value="" selected disabled class="text-center">Pilih Santri</option>
                                         <?php foreach($santri as $row): ?>
                                         <option value="<?= $row['nis'] ?>" <?= (old('nis') ? 'selected' : '')?>><?= $row['nis'].' | '.$row['nama_santri'] ?></option>
                                         <?php endforeach;?>
                                     </select>
-                                    <?php if($validation->hasError('nis')){ ?>
+                                    <?php  if(isset($err['nis'])){  ?>
                                         <div class="invalid-feedback">
-                                            <?=  $validation->getError('nis'); ?>
+                                            <?=  $err['nis']; ?>
                                         </div>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">Jenis Kelamin</label>
-                                    <select name="jenis_kelamin" id="jenis_kelamin" class="form-control <?= ($validation->hasError('jenis_kelamin') ? 'is-invalid' : ''); ?>">
+                                    <select name="jenis_kelamin" id="jenis_kelamin" class="form-control <?= isset($err['jenis_kelamin']) ? $err['jenis_kelamin'] ? 'is-invalid' : '' : ''; ?>">
                                         <option value="" selected disabled class="text-center">Pilih Jenis Kelamin</option>
                                         <option value="Laki-laki" <?= (old('jenis_kelamin') == 'Laki-laki' ? 'selected' : '')?>>Laki-Laki</option>
                                         <option value="Perempuan" <?= (old('jenis_kelamin') == 'Perempuan' ? 'selected' : '')?>>Perempuan</option>
                                     </select>
-                                    <?php if($validation->hasError('jenis_kelamin')){ ?>
+                                    <?php  if(isset($err['jenis_kelamin'])){  ?>
                                         <div class="invalid-feedback">
-                                            <?=  $validation->getError('jenis_kelamin'); ?>
+                                            <?=  $err['jenis_kelamin']; ?>
                                         </div>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">Tempat Lahir</label>
-                                    <input type="text" id="tempat" class="form-control <?= ($validation->hasError('tempat') ? 'is-invalid' : ''); ?>" name="tempat" value="<?= old('tempat') ?>" placeholder="Tempat Lahir">
-                                    <?php if($validation->hasError('tempat')){ ?>
+                                    <input type="text" id="tempat" class="form-control <?= isset($err['tempat']) ? $err['tempat'] ? 'is-invalid' : '' : ''; ?>" name="tempat" value="<?= old('tempat') ?>" placeholder="Tempat Lahir">
+                                    <?php  if(isset($err['tempat'])){  ?>
                                         <div class="invalid-feedback">
-                                            <?=  $validation->getError('tempat'); ?>
+                                            <?=  $err['tempat']; ?>
                                         </div>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">Tanggal Lahir</label>
-                                    <input type="date" id="tanggal_lahir" class="form-control <?= ($validation->hasError('tanggal_lahir') ? 'is-invalid' : ''); ?>" name="tanggal_lahir" value="<?= old('tanggal_lahir') ?>">
-                                    <?php if($validation->hasError('jenis_kelamin')){ ?>
+                                    <input type="date" id="tanggal_lahir" class="form-control <?= isset($err['tanggal_lahir']) ? $err['tanggal_lahir'] ? 'is-invalid' : '' : ''; ?>" name="tanggal_lahir" value="<?= old('tanggal_lahir') ?>">
+                                    <?php  if(isset($err['tanggal_lahir'])){  ?>
                                         <div class="invalid-feedback">
-                                            <?=  $validation->getError('jenis_kelamin'); ?>
+                                            <?=  $err['tanggal_lahir']; ?>
                                         </div>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">Usia Santri</label>
-                                    <input type="number" id="usia_santri" class="form-control <?= ($validation->hasError('usia_santri') ? 'is-invalid' : ''); ?>" name="usia_santri" value="<?= old('usia_santri') ?>" placeholder="Tempat Lahir">
-                                    <?php if($validation->hasError('usia_santri')){ ?>
+                                    <input type="number" id="usia_santri" class="form-control <?= isset($err['usia_santri']) ? $err['usia_santri'] ? 'is-invalid' : '' : ''; ?>" name="usia_santri" value="<?= old('usia_santri') ?>" placeholder="Tempat Lahir">
+                                    <?php  if(isset($err['usia_santri'])){  ?>
                                         <div class="invalid-feedback">
-                                            <?=  $validation->getError('usia_santri'); ?>
+                                            <?=  $err['usia_santri']; ?>
                                         </div>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">Alamat</label>
-                                    <textarea name="alamat" id="alamat" cols="30" rows="10" class="form-control <?= ($validation->hasError('alamat') ? 'is-invalid' : ''); ?>" placeholder="Alamat Lengkap"><?= old('alamat')?></textarea>
-                                    <?php if($validation->hasError('alamat')){ ?>
+                                    <textarea name="alamat" id="alamat" cols="30" rows="10" class="form-control <?= isset($err['alamat']) ? $err['alamat'] ? 'is-invalid' : '' : ''; ?>" placeholder="Alamat Lengkap"><?= old('alamat')?></textarea>
+                                    <?php  if(isset($err['alamat'])){  ?>
                                         <div class="invalid-feedback">
-                                            <?=  $validation->getError('alamat'); ?>
+                                            <?=  $err['alamat']; ?>
                                         </div>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">Nama Ayah</label>
-                                    <input type="text" id="nama_ayah" class="form-control <?= ($validation->hasError('nama_ayah') ? 'is-invalid' : ''); ?>" name="nama_ayah" value="<?= old('nama_ayah') ?>" placeholder="Nama Ayah">
-                                    <?php if($validation->hasError('nama_ayah')){ ?>
+                                    <input type="text" id="nama_ayah" class="form-control <?= isset($err['nama_ayah']) ? $err['nama_ayah'] ? 'is-invalid' : '' : ''; ?>" name="nama_ayah" value="<?= old('nama_ayah') ?>" placeholder="Nama Ayah">
+                                    <?php  if(isset($err['nama_ayah'])){  ?>
                                         <div class="invalid-feedback">
-                                            <?=  $validation->getError('nama_ayah'); ?>
+                                            <?=  $err['nama_ayah']; ?>
                                         </div>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">Pekerjaan Ayah</label>
-                                    <input type="text" id="pekerjaan_ayah" class="form-control <?= ($validation->hasError('pekerjaan_ayah') ? 'is-invalid' : ''); ?>" name="pekerjaan_ayah" value="<?= old('pekerjaan_ayah') ?>" placeholder="Pekerjaan Ayah">
-                                    <?php if($validation->hasError('pekerjaan_ayah')){ ?>
+                                    <input type="text" id="pekerjaan_ayah" class="form-control <?= isset($err['pekerjaan_ayah']) ? $err['pekerjaan_ayah'] ? 'is-invalid' : '' : ''; ?>" name="pekerjaan_ayah" value="<?= old('pekerjaan_ayah') ?>" placeholder="Pekerjaan Ayah">
+                                    <?php  if(isset($err['pekerjaan_ayah'])){  ?>
                                         <div class="invalid-feedback">
-                                            <?=  $validation->getError('pekerjaan_ayah'); ?>
+                                            <?=  $err['pekerjaan_ayah']; ?>
                                         </div>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">Nama Ibu</label>
-                                    <input type="text" id="nama_ibu" class="form-control <?= ($validation->hasError('nama_ibu') ? 'is-invalid' : ''); ?>" name="nama_ibu" value="<?= old('nama_ibu') ?>" placeholder="Nama Ibu">
-                                    <?php if($validation->hasError('nama_ibu')){ ?>
+                                    <input type="text" id="nama_ibu" class="form-control <?= isset($err['nama_ibu']) ? $err['nama_ibu'] ? 'is-invalid' : '' : ''; ?>" name="nama_ibu" value="<?= old('nama_ibu') ?>" placeholder="Nama Ibu">
+                                    <?php  if(isset($err['nama_ibu'])){  ?>
                                         <div class="invalid-feedback">
-                                            <?=  $validation->getError('nama_ibu'); ?>
+                                            <?=  $err['nama_ibu']; ?>
                                         </div>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">Pekerjaan Ibu</label>
-                                    <input type="text" id="pekerjaan_ibu" class="form-control <?= ($validation->hasError('pekerjaan_ibu') ? 'is-invalid' : ''); ?>" name="pekerjaan_ibu" value="<?= old('pekerjaan_ibu') ?>" placeholder="Pekerjaan Ibu">
-                                    <?php if($validation->hasError('pekerjaan_ibu')){ ?>
+                                    <input type="text" id="pekerjaan_ibu" class="form-control <?= isset($err['pekerjaan_ibu']) ? $err['pekerjaan_ibu'] ? 'is-invalid' : '' : ''; ?>" name="pekerjaan_ibu" value="<?= old('pekerjaan_ibu') ?>" placeholder="Pekerjaan Ibu">
+                                    <?php  if(isset($err['pekerjaan_ibu'])){  ?>
                                         <div class="invalid-feedback">
-                                            <?=  $validation->getError('pekerjaan_ibu'); ?>
+                                            <?=  $err['pekerjaan_ibu']; ?>
                                         </div>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">No Telepon</label>
-                                    <input type="number" id="no_telepon" class="form-control <?= ($validation->hasError('no_telepon') ? 'is-invalid' : ''); ?>" name="no_telepon" value="<?= old('no_telepon') ?>" placeholder="Nomor Telepon">
-                                    <?php if($validation->hasError('no_telpon')){ ?>
+                                    <input type="number" id="no_telepon" class="form-control <?= isset($err['no_telepon']) ? $err['no_telepon'] ? 'is-invalid' : '' : ''; ?>" name="no_telepon" value="<?= old('no_telepon') ?>" placeholder="Nomor Telepon">
+                                    <?php  if(isset($err['no_telepon'])){  ?>
                                         <div class="invalid-feedback">
-                                            <?=  $validation->getError('no_telpon'); ?>
+                                            <?=  $err['no_telepon']; ?>
                                         </div>
                                     <?php } ?>
                                 </div>

@@ -1,3 +1,8 @@
+<?php 
+    if(session()->getFlashdata('error') != null){
+        $err = session()->getFlashData('error');
+    }
+?>
 <?= $this->extend('layouts/template') ?>
 
 <?= $this->section('content') ?>
@@ -21,9 +26,9 @@
 
     <section class="content">
         <div class="container-fluid">
-            <?php if(session()->getFlashdata('error')){  ?>
+            <?php if(session()->getFlashdata('error-header')){  ?>
                 <div class="alert alert-danger" role="alert">
-                    <?= session()->getFlashdata('error') ?>
+                    <?= session()->getFlashdata('error-header') ?>
                 </div>
             <?php } ?>
             <div class="row">
@@ -41,7 +46,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">NIS | Nama Santri</label>
-                                    <select name="nis" id="nis" class="form-control <?= ($validation->hasError('nis')) ? 'is-invalid' : ''; ?>" <?= ($u_group['group_id'] == 2) ? 'readonly' : '' ?>>
+                                    <select name="nis" id="nis" class="form-control <?= isset($err['nis']) ? $err['nis'] ? 'is-invalid' : '' : ''; ?>" <?= ($u_group['group_id'] == 2) ? 'readonly' : '' ?>>
                                         <option value="" selected disabled class="text-center">PILIH SISWA</option>
                                         <?php if($u_group['group_id'] == 1) {?>
                                             <?php foreach($santri as $row): ?>
@@ -53,33 +58,38 @@
                                             <?php endforeach;?>
                                         <?php }?>
                                     </select>
-                                    <?php if($validation->hasError('nis')){ ?>
+                                    <?php  if(isset($err['nis'])){  ?>
                                         <div class="invalid-feedback">
-                                            <?=  $validation->getError('nis'); ?>
+                                            <?=  $err['nis']; ?>
                                         </div>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Tanggal Pembayaran</label>
-                                    <input type="date" name="tanggal" id="tanggal" class="form-control <?= ($validation->hasError('tanggal')) ? 'is-invalid' : ''; ?>" placeholder="Tanggal" value="<?= old('tanggal') ?>">
-                                    <?php if($validation->hasError('tanggal')){ ?>
+                                    <input type="date" name="tanggal" id="tanggal" class="form-control <?= isset($err['tanggal']) ? $err['tanggal'] ? 'is-invalid' : '' : ''; ?>" placeholder="Tanggal" value="<?= old('tanggal') ?>">
+                                    <?php  if(isset($err['tanggal'])){  ?>
                                         <div class="invalid-feedback">
-                                            <?=  $validation->getError('tanggal'); ?>
+                                            <?=  $err['tanggal']; ?>
                                         </div>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Jumlah Iuran</label>
-                                    <input type="number" name="jumlah_iuran" id="jumlah_iuran" class="form-control <?= ($validation->hasError('tanggal')) ? 'is-invalid' : ''; ?>" placeholder="Jumlah Iuran" value="<?= old('jumlah_iuran') ?>">
-                                    <?php if($validation->hasError('jumlah_iuran')){ ?>
+                                    <input type="number" name="jumlah_iuran" id="jumlah_iuran" class="form-control <?= isset($err['jumlah_iuran']) ? $err['jumlah_iuran'] ? 'is-invalid' : '' : ''; ?>" placeholder="Jumlah Iuran" value="<?= old('jumlah_iuran') ?>">
+                                    <?php  if(isset($err['jumlah_iuran'])){  ?>
                                         <div class="invalid-feedback">
-                                            <?=  $validation->getError('jumlah_iuran'); ?>
+                                            <?=  $err['jumlah_iuran']; ?>
                                         </div>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Keterangan</label>
-                                    <textarea name="keterangan" id="keterangan" cols="30" rows="10" class="form-control"><?= old('keterangan') ?></textarea>
+                                    <textarea name="keterangan" id="keterangan" cols="30" rows="10" class="form-control <?= isset($err['keterangan']) ? $err['keterangan'] ? 'is-invalid' : '' : ''; ?>"><?= old('keterangan') ?></textarea>
+                                    <?php  if(isset($err['keterangan'])){  ?>
+                                        <div class="invalid-feedback">
+                                            <?=  $err['keterangan']; ?>
+                                        </div>
+                                    <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success btn-block">Simpan</button>

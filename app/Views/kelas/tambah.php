@@ -1,3 +1,8 @@
+<?php 
+    if(session()->getFlashdata('error') != null){
+        $err = session()->getFlashData('error');
+    }
+?>
 <?= $this->extend('layouts/template'); ?>
 
 <?= $this->section('content') ?>
@@ -20,9 +25,9 @@
 
     <section class="content">
         <div class="container-fluid">
-            <?php if(session()->getFlashdata('error')){  ?>
+            <?php if(session()->getFlashdata('error-header')){  ?>
                 <div class="alert alert-danger" role="alert">
-                    <?= session()->getFlashdata('error') ?>
+                    <?= session()->getFlashdata('error-header') ?>
                 </div>
             <?php } ?>
             <div class="row">
@@ -40,10 +45,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">Nama Kelas</label>
-                                    <input type="text" id="nama_kelas" class="form-control <?= ($validation->hasError('nama_kelas') ? 'is-invalid' : ''); ?>" name="nama_kelas" placeholder="Nama Kelas" value="<?= old('nama_kelas') ?>" >
-                                    <?php if($validation->hasError('nama_kelas')){ ?>
+                                    <input type="text" id="nama_kelas" class="form-control <?= isset($err['nama_kelas']) ? $err['nama_kelas'] ? 'is-invalid' : '' : ''; ?>" name="nama_kelas" placeholder="Nama Kelas" value="<?= old('nama_kelas') ?>" >
+                                    <?php  if(isset($err['nama_kelas'])){  ?>
                                         <div class="invalid-feedback">
-                                            <?php  $validation->getError('nama_kelas'); ?>
+                                            <?=  $err['nama_kelas']; ?>
                                         </div>
                                     <?php } ?>
                                 </div>

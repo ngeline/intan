@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">Status Santri</label>
-                                    <input type="text" id="status_santri" class="form-control <?= isset($err['status_santri']) ? $err['status_santri'] ? 'is-invalid' : '' : ''; ?>" name="status_santri" value="<?= old('status_santri') ?>">
+                                    <input type="text" id="status_santri" class="form-control <?= isset($err['status_santri']) ? $err['status_santri'] ? 'is-invalid' : '' : ''; ?>" name="status_santri" value="<?= old('status_santri') ?>" placeholder="status santri">
                                     <?php if(isset($err['status_santri'])){  ?>
                                         <div class="invalid-feedback">
                                             <?=  $err['status_santri']; ?>
