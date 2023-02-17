@@ -79,12 +79,15 @@ $routes->group('sumbangan-pembinaan-pendidikan', static function($routes){
 // User
 $routes->group('user', static function($routes){
     $routes->get('/', 'User::index', ['filter' => 'role:admin', 'as' => 'user']);
+    $routes->get('aktivasi/(:num)', 'User::aktivasi/$1', ['filter' => 'role:admin', 'as' => 'user.aktivasi']);
+    $routes->get('blokir/(:num)', 'User::blokir/$1', ['filter' => 'role:admin', 'as' => 'user.blokir']);
 });
 
 // Profile
 $routes->group('profile', static function($routes){
     $routes->get('(:num)', 'Profile::index/$1', ['filter' => 'role:admin, wali santri', 'as' => 'profile']);
     $routes->post('(:num)', 'Profile::update/$1', ['filter' => 'role:admin, wali santri', 'as' => 'update.profile']);
+    $routes->post('update-insert/(:num)', 'Profile::updateInsert/$1', ['filter' => 'role:wali santri', 'as' => 'updateInsert.profile']);
 });
 
 /*

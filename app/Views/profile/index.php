@@ -58,12 +58,12 @@
                                 </div>
                             </form>
                         <?php }else{ ?>
-                            <form action="<?= url_to('update.profile', $user['id']) ?>" method="POST" enctype="multipart/form-data">
+                            <form action="<?= isset($walisantri['id_admin']) ?  url_to('update.profile', $user['id']) : url_to('updateInsert.profile', $user['id']) ?>" method="POST" enctype="multipart/form-data">
                                 <?= csrf_field() ?>
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="inputName">Email</label>
-                                        <input type="text" id="email" class="form-control" name="email" placeholder="Email" value="<?= old('email') ? old('email') : $user['email'] ?>">
+                                        <input type="text" id="email" class="form-control" name="email" placeholder="Email" value="<?= old('email') ? old('email') : $user['email']; ?>">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputName">Username</label>
@@ -78,11 +78,11 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="inputName">ID Admin</label>
-                                        <input type="text" id="id_admin" class="form-control" name="id_admin" placeholder="ID Admin" value="<?= old('id_admin') ? old('id_admin') : $walisantri['id_admin'] ?>" readonly>
+                                        <input type="text" id="id_admin" class="form-control" name="id_admin" placeholder="ID Admin" value="<?= old('id_admin') ? old('id_admin') : (isset($walisantri['id_admin']) ? $walisantri['id_admin'] : 3);  ?>" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputName">Nama Wali Santri</label>
-                                        <input type="text" id="nama_walisantri" class="form-control  <?= ($validation->hasError('nama_walisantri')) ? 'is-invalid' : ''; ?>" name="nama_walisantri" placeholder="Nama Wali Santri" value="<?= old('nama_walisantri', $walisantri['nama_walisantri']) ?>">
+                                        <input type="text" id="nama_walisantri" class="form-control  <?= ($validation->hasError('nama_walisantri')) ? 'is-invalid' : ''; ?>" name="nama_walisantri" placeholder="Nama Wali Santri" value="<?= old('nama_walisantri', (isset($walisantri['nama_walisantri']) ? $walisantri['nama_walisantri'] : '')) ?>">
                                         <?php if($validation->hasError('nama_walisantri')){ ?>
                                             <div class="invalid-feedback">
                                                 <?=  $validation->getError('nama_walisantri'); ?>
@@ -91,12 +91,16 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputName">NIS Santri</label>
-                                        <select name="nis" id="nis" class="form-control <?= ($validation->hasError('nis') ? 'is-invalid' : ''); ?>" readonly>
-                                            <option value="" selected disabled class="text-center">Pilih Santri</option>
-                                            <?php foreach($santri as $row): ?>
-                                            <option value="<?= $row['nis'] ?>" <?= (old('nis', $walisantri['nis']) ? 'selected' : '')?> readonly><?= $row['nis'].' | '.$row['nama_santri'] ?></option>
-                                            <?php endforeach;?>
-                                        </select>
+                                        <?php if(isset($walisantri['nis'])){ ?>
+                                            <input type="text" name="nis" class="form-control" value="<?= $walisantri['nis'] ?>" readonly>
+                                        <?php }else{ ?>
+                                            <select name="nis" id="nis-walisantri" class="form-control <?= ($validation->hasError('nis') ? 'is-invalid' : ''); ?>">
+                                                <option value="" selected disabled class="text-center">Pilih Santri</option>
+                                                <?php foreach($santri as $row): ?>
+                                                <option value="<?= $row['nis'] ?>" <?= (old('nis', (isset($walisantri['nis']) ? $walisantri['nama_walisantri'] : '')) ? 'selected' : '')?>><?= $row['nis'].' | '.$row['nama_santri'] ?></option>
+                                                <?php endforeach;?>
+                                            </select>
+                                        <?php } ?>
                                         <?php if($validation->hasError('nis')){ ?>
                                             <div class="invalid-feedback">
                                                 <?=  $validation->getError('nis'); ?>
@@ -107,8 +111,8 @@
                                         <label for="inputName">Jenis Kelamin</label>
                                         <select name="jenis_kelamin" id="jenis_kelamin" class="form-control <?= ($validation->hasError('jenis_kelamin') ? 'is-invalid' : ''); ?>">
                                             <option value="" selected disabled class="text-center">Pilih Jenis Kelamin</option>
-                                            <option value="Laki-laki" <?= (old('jenis_kelamin', $walisantri['jenis_kelamin']) == 'Laki-laki' ? 'selected' : '')?>>Laki-Laki</option>
-                                            <option value="Perempuan" <?= (old('jenis_kelamin', $walisantri['jenis_kelamin']) == 'Perempuan' ? 'selected' : '')?>>Perempuan</option>
+                                            <option value="Laki-laki" <?= (old('jenis_kelamin', (isset($walisantri['jenis_kelamin']) ? $walisantri['jenis_kelamin'] : '')) == 'Laki-laki' ? 'selected' : '')?>>Laki-Laki</option>
+                                            <option value="Perempuan" <?= (old('jenis_kelamin', (isset($walisantri['jenis_kelamin']) ? $walisantri['jenis_kelamin'] : '')) == 'Perempuan' ? 'selected' : '')?>>Perempuan</option>
                                         </select>
                                         <?php if($validation->hasError('jenis_kelamin')){ ?>
                                             <div class="invalid-feedback">
@@ -118,7 +122,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputName">Tempat Lahir</label>
-                                        <input type="text" id="tempat" class="form-control <?= ($validation->hasError('tempat') ? 'is-invalid' : ''); ?>" name="tempat" value="<?= old('tempat', $walisantri['tempat']) ?>" placeholder="Tempat Lahir">
+                                        <input type="text" id="tempat" class="form-control <?= ($validation->hasError('tempat') ? 'is-invalid' : ''); ?>" name="tempat" value="<?= old('tempat', isset($walisantri['tempat']) ? $walisantri['tempat'] : '') ?>" placeholder="Tempat Lahir">
                                         <?php if($validation->hasError('tempat')){ ?>
                                             <div class="invalid-feedback">
                                                 <?=  $validation->getError('tempat'); ?>
@@ -127,7 +131,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputName">Tanggal Lahir</label>
-                                        <input type="date" id="tanggal_lahir" class="form-control <?= ($validation->hasError('tanggal_lahir') ? 'is-invalid' : ''); ?>" name="tanggal_lahir" value="<?= old('tanggal_lahir', $walisantri['tanggal_lahir']) ?>">
+                                        <input type="date" id="tanggal_lahir" class="form-control <?= ($validation->hasError('tanggal_lahir') ? 'is-invalid' : ''); ?>" name="tanggal_lahir" value="<?= old('tanggal_lahir', isset($walisantri['tanggal_lahir']) ? $walisantri['tanggal_lahir'] : '') ?>">
                                         <?php if($validation->hasError('jenis_kelamin')){ ?>
                                             <div class="invalid-feedback">
                                                 <?=  $validation->getError('jenis_kelamin'); ?>
@@ -136,7 +140,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputName">Usia Santri</label>
-                                        <input type="number" id="usia_santri" class="form-control <?= ($validation->hasError('usia_santri') ? 'is-invalid' : ''); ?>" name="usia_santri" value="<?= old('usia_santri', $walisantri['usia_santri']) ?>" placeholder="Tempat Lahir">
+                                        <input type="number" id="usia_santri" class="form-control <?= ($validation->hasError('usia_santri') ? 'is-invalid' : ''); ?>" name="usia_santri" value="<?= old('usia_santri', isset($walisantri['usia_santri']) ? $walisantri['usia_santri'] : '') ?>" placeholder="Tempat Lahir">
                                         <?php if($validation->hasError('usia_santri')){ ?>
                                             <div class="invalid-feedback">
                                                 <?=  $validation->getError('usia_santri'); ?>
@@ -145,7 +149,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputName">Alamat</label>
-                                        <textarea name="alamat" id="alamat" cols="30" rows="10" class="form-control <?= ($validation->hasError('alamat') ? 'is-invalid' : ''); ?>" placeholder="Alamat Lengkap"><?= old('alamat', $walisantri['alamat'])?></textarea>
+                                        <textarea name="alamat" id="alamat" cols="30" rows="10" class="form-control <?= ($validation->hasError('alamat') ? 'is-invalid' : ''); ?>" placeholder="Alamat Lengkap"><?= old('alamat', isset($walisantri['alamat']) ? $walisantri['alamat'] : '')?></textarea>
                                         <?php if($validation->hasError('alamat')){ ?>
                                             <div class="invalid-feedback">
                                                 <?=  $validation->getError('alamat'); ?>
@@ -154,7 +158,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputName">Nama Ayah</label>
-                                        <input type="text" id="nama_ayah" class="form-control <?= ($validation->hasError('nama_ayah') ? 'is-invalid' : ''); ?>" name="nama_ayah" value="<?= old('nama_ayah', $walisantri['nama_ayah']) ?>" placeholder="Nama Ayah">
+                                        <input type="text" id="nama_ayah" class="form-control <?= ($validation->hasError('nama_ayah') ? 'is-invalid' : ''); ?>" name="nama_ayah" value="<?= old('nama_ayah', isset($walisantri['nama_ayah']) ? $walisantri['nama_ayah'] : '') ?>" placeholder="Nama Ayah">
                                         <?php if($validation->hasError('nama_ayah')){ ?>
                                             <div class="invalid-feedback">
                                                 <?=  $validation->getError('nama_ayah'); ?>
@@ -163,7 +167,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputName">Pekerjaan Ayah</label>
-                                        <input type="text" id="pekerjaan_ayah" class="form-control <?= ($validation->hasError('pekerjaan_ayah') ? 'is-invalid' : ''); ?>" name="pekerjaan_ayah" value="<?= old('pekerjaan_ayah', $walisantri['pekerjaan_ayah']) ?>" placeholder="Pekerjaan Ayah">
+                                        <input type="text" id="pekerjaan_ayah" class="form-control <?= ($validation->hasError('pekerjaan_ayah') ? 'is-invalid' : ''); ?>" name="pekerjaan_ayah" value="<?= old('pekerjaan_ayah', isset($walisantri['pekerjaan_ayah']) ? $walisantri['pekerjaan_ayah'] : '') ?>" placeholder="Pekerjaan Ayah">
                                         <?php if($validation->hasError('pekerjaan_ayah')){ ?>
                                             <div class="invalid-feedback">
                                                 <?=  $validation->getError('pekerjaan_ayah'); ?>
@@ -172,7 +176,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputName">Nama Ibu</label>
-                                        <input type="text" id="nama_ibu" class="form-control <?= ($validation->hasError('nama_ibu') ? 'is-invalid' : ''); ?>" name="nama_ibu" value="<?= old('nama_ibu', $walisantri['nama_ibu']) ?>" placeholder="Nama Ibu">
+                                        <input type="text" id="nama_ibu" class="form-control <?= ($validation->hasError('nama_ibu') ? 'is-invalid' : ''); ?>" name="nama_ibu" value="<?= old('nama_ibu', isset($walisantri['nama_ibu']) ? $walisantri['nama_ibu'] : '') ?>" placeholder="Nama Ibu">
                                         <?php if($validation->hasError('nama_ibu')){ ?>
                                             <div class="invalid-feedback">
                                                 <?=  $validation->getError('nama_ibu'); ?>
@@ -181,7 +185,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputName">Pekerjaan Ibu</label>
-                                        <input type="text" id="pekerjaan_ibu" class="form-control <?= ($validation->hasError('pekerjaan_ibu') ? 'is-invalid' : ''); ?>" name="pekerjaan_ibu" value="<?= old('pekerjaan_ibu', $walisantri['pekerjaan_ibu']) ?>" placeholder="Pekerjaan Ibu">
+                                        <input type="text" id="pekerjaan_ibu" class="form-control <?= ($validation->hasError('pekerjaan_ibu') ? 'is-invalid' : ''); ?>" name="pekerjaan_ibu" value="<?= old('pekerjaan_ibu', isset($walisantri['pekerjaan_ibu']) ? $walisantri['pekerjaan_ibu'] : '') ?>" placeholder="Pekerjaan Ibu">
                                         <?php if($validation->hasError('pekerjaan_ibu')){ ?>
                                             <div class="invalid-feedback">
                                                 <?=  $validation->getError('pekerjaan_ibu'); ?>
@@ -190,7 +194,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputName">No Telepon</label>
-                                        <input type="number" id="no_telepon" class="form-control <?= ($validation->hasError('no_telepon') ? 'is-invalid' : ''); ?>" name="no_telepon" value="<?= old('no_telepon', $walisantri['no_telepon']) ?>" placeholder="Nomor Telepon">
+                                        <input type="number" id="no_telepon" class="form-control <?= ($validation->hasError('no_telepon') ? 'is-invalid' : ''); ?>" name="no_telepon" value="<?= old('no_telepon', isset($walisantri['no_telepon']) ? $walisantri['no_telepon'] : '') ?>" placeholder="Nomor Telepon">
                                         <?php if($validation->hasError('no_telpon')){ ?>
                                             <div class="invalid-feedback">
                                                 <?=  $validation->getError('no_telpon'); ?>
@@ -217,6 +221,7 @@
     <script>
         $(document).ready(function() {
             $('#jenis_kelamin').select2();
+            $('#nis-walisantri').select2();
         });
     </script>
 <?= $this->endSection() ?>

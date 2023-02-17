@@ -70,6 +70,7 @@
         </div>
         <div class="input-group mb-3">
             <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+            <a href="<?= url_to('register') ?>" class="btn btn-danger btn-block">Registrasi</a>
         </div>
       </form>
     <!-- /.login-card-body -->
