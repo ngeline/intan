@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 25, 2023 at 01:51 PM
+-- Generation Time: Feb 18, 2023 at 02:50 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -98,7 +98,10 @@ INSERT INTO `auth_groups_permissions` (`group_id`, `permission_id`) VALUES
 (1, 4),
 (1, 5),
 (1, 6),
-(1, 7);
+(1, 7),
+(2, 1),
+(2, 2),
+(2, 6);
 
 -- --------------------------------------------------------
 
@@ -116,7 +119,11 @@ CREATE TABLE `auth_groups_users` (
 --
 
 INSERT INTO `auth_groups_users` (`group_id`, `user_id`) VALUES
-(1, 1);
+(1, 1),
+(2, 3),
+(2, 8),
+(2, 10),
+(2, 11);
 
 -- --------------------------------------------------------
 
@@ -148,7 +155,44 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (8, '::1', 'admin@gmail.com', 1, '2023-01-25 13:22:13', 1),
 (9, '::1', 'admin@gmail.com', 1, '2023-01-25 13:37:00', 1),
 (10, '::1', 'admin@gmail.com', 1, '2023-01-25 13:47:44', 1),
-(11, '::1', 'admin@gmail.com', 1, '2023-01-25 13:49:54', 1);
+(11, '::1', 'admin@gmail.com', 1, '2023-01-25 13:49:54', 1),
+(12, '::1', 'admin@gmail.com', 1, '2023-01-28 11:36:32', 1),
+(13, '::1', 'admin@gmail.com', 1, '2023-01-28 13:26:56', 1),
+(14, '::1', 'admin@gmail.com', 1, '2023-01-28 13:28:59', 1),
+(15, '::1', 'admin@gmail.com', 1, '2023-01-28 13:31:24', 1),
+(16, '::1', 'admin@gmail.com', 1, '2023-01-28 13:41:49', 1),
+(17, '::1', 'admin@gmail.com', NULL, '2023-01-28 15:44:12', 0),
+(18, '::1', 'admin', NULL, '2023-01-28 15:44:17', 0),
+(19, '::1', 'admin', NULL, '2023-01-28 15:44:29', 0),
+(20, '::1', 'admin', NULL, '2023-01-28 15:45:10', 0),
+(21, '::1', 'admin@gmail.com', NULL, '2023-01-28 15:45:28', 0),
+(22, '::1', 'admin', NULL, '2023-01-28 15:47:24', 0),
+(23, '::1', 'admin', NULL, '2023-01-28 15:47:36', 0),
+(24, '::1', 'admin', NULL, '2023-01-28 15:48:12', 0),
+(25, '::1', 'admin', NULL, '2023-01-28 15:50:01', 0),
+(26, '::1', 'admin', NULL, '2023-01-28 15:50:05', 0),
+(27, '::1', 'admin@gmail.com', 1, '2023-01-28 15:50:27', 1),
+(28, '::1', 'admin', NULL, '2023-01-28 15:51:56', 0),
+(29, '::1', 'admin@gmail.com', 1, '2023-01-29 01:47:04', 1),
+(30, '::1', 'admin@gmail.com', 1, '2023-01-29 07:45:22', 1),
+(31, '::1', 'admin@gmail.com', 1, '2023-01-30 12:25:00', 1),
+(32, '::1', 'eklesia', 8, '2023-01-30 13:23:20', 0),
+(33, '::1', 'Eklesia@gmail.com', 8, '2023-01-30 13:23:54', 1),
+(34, '::1', 'admin@gmail.com', 1, '2023-01-30 14:03:56', 1),
+(35, '::1', 'Eklesia@gmail.com', 8, '2023-01-30 14:05:42', 1),
+(36, '::1', 'eklesia', NULL, '2023-01-30 14:13:29', 0),
+(37, '::1', 'Eklesia@gmail.com', 8, '2023-01-30 14:13:36', 1),
+(38, '::1', 'admin@gmail.com', 1, '2023-02-08 13:15:19', 1),
+(39, '::1', 'admin@gmail.com', 1, '2023-02-17 15:45:15', 1),
+(40, '::1', 'Eklesia@gmail.com', 8, '2023-02-17 16:57:17', 1),
+(41, '::1', 'alvaro@gmail.com', 9, '2023-02-17 17:20:49', 1),
+(42, '::1', 'test@gmail.com', 10, '2023-02-17 17:40:36', 1),
+(43, '::1', 'admin@gmail.com', 1, '2023-02-17 18:05:45', 1),
+(44, '::1', 'test', 10, '2023-02-17 18:13:01', 0),
+(45, '::1', 'test', NULL, '2023-02-17 18:20:14', 0),
+(46, '::1', 'test', 10, '2023-02-17 18:20:23', 0),
+(47, '::1', 'admin@gmail.com', 1, '2023-02-18 11:49:34', 1),
+(48, '::1', 'admin@gmail.com', 1, '2023-02-18 12:15:19', 1);
 
 -- --------------------------------------------------------
 
@@ -263,7 +307,8 @@ INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`
 (10, '2023-01-18-232238', 'App\\Database\\Migrations\\Santri', 'default', 'App', 1674084784, 2),
 (11, '2023-01-18-232240', 'App\\Database\\Migrations\\Spp', 'default', 'App', 1674084784, 2),
 (12, '2023-01-18-232442', 'App\\Database\\Migrations\\Walisantri', 'default', 'App', 1674084784, 2),
-(13, '2017-11-20-223112', 'Myth\\Auth\\Database\\Migrations\\CreateAuthTables', 'default', 'Myth\\Auth', 1674483080, 3);
+(13, '2017-11-20-223112', 'Myth\\Auth\\Database\\Migrations\\CreateAuthTables', 'default', 'Myth\\Auth', 1674483080, 3),
+(15, '2023-02-18-120946', 'App\\Database\\Migrations\\TempSpp', 'default', 'App', 1676724495, 4);
 
 -- --------------------------------------------------------
 
@@ -303,6 +348,35 @@ CREATE TABLE `spp` (
   `nama_santri` varchar(255) NOT NULL,
   `tanggal` date DEFAULT NULL,
   `jumlah_iuran` int NOT NULL,
+  `foto` text,
+  `keterangan` text,
+  `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `spp`
+--
+
+INSERT INTO `spp` (`id`, `id_admin`, `nis`, `nama_santri`, `tanggal`, `jumlah_iuran`, `foto`, `keterangan`, `createdAt`, `updatedAt`) VALUES
+(2, 3, '123343', 'Budi Tabudin', '2023-01-29', 200000, NULL, 'Pembayaran SPP semester', NULL, '2023-01-29 08:46:37'),
+(26, 3, '123343', 'Budi Tabudin', '2023-01-30', 2000, NULL, 'check rekening', '2023-01-30 14:05:26', '2023-01-30 14:05:26'),
+(32, 3, '1827493', 'Adam Malik', '2023-02-18', 200000, '', 'TEST', '2023-02-18 14:45:23', '2023-02-18 14:45:23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `temp_spp`
+--
+
+CREATE TABLE `temp_spp` (
+  `id` int UNSIGNED NOT NULL,
+  `id_admin` int UNSIGNED NOT NULL,
+  `nis` varchar(10) NOT NULL,
+  `nama_santri` varchar(255) NOT NULL,
+  `tanggal` date DEFAULT NULL,
+  `jumlah_iuran` int NOT NULL,
+  `foto` text NOT NULL,
   `keterangan` text,
   `createdAt` datetime DEFAULT NULL,
   `updatedAt` datetime DEFAULT NULL
@@ -337,7 +411,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'admin@gmail.com', 'admin', '$2y$10$FZF9jlFLdMyRiBnQ1Uolb.oolmkPuvqZCSNzgKYpZ1UKCCIJDYb8e', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-01-23 14:22:29', '2023-01-23 14:22:29', NULL);
+(1, 'admin@gmail.com', 'admin', '$2y$10$FZF9jlFLdMyRiBnQ1Uolb.oolmkPuvqZCSNzgKYpZ1UKCCIJDYb8e', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-01-23 14:22:29', '2023-01-30 13:22:55', NULL),
+(3, 'Mahmud Jalaludin@gmail.com', 'Mahmud Jalaludin', '$2y$10$GyUCrr5hEEvG6D/x2oZcweSPpPXr6bfQKoldAcPBYAYgct5BbzuBW', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL),
+(8, 'Eklesia@gmail.com', 'Eklesia', '$2y$10$zmWIZGcuNJrl1CkG4k2HaeWDBVW13f2SVhX8OCcKKx2UUy1mHx05G', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-01-30 12:46:18', '2023-01-30 13:36:59', NULL),
+(9, 'alvaro@gmail.com', 'alvaro fuzhi', '$2y$10$oSxgLjYEXLSP77oY6XNZtOep5AAPPYNy.cTJcsHhcN45VPJAZIKW.', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-02-17 17:20:30', '2023-02-17 17:20:30', NULL),
+(10, 'test@gmail.com', 'test', '$2y$10$Cb1.DkRxQ0gCVsqcV.tAhu6kaCARw.HkZVY0iQoSqfb0UU91CBKVq', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, '2023-02-17 17:40:26', '2023-02-17 18:03:42', NULL),
+(11, 'tester@gmail.com', 'tester', '$2y$10$2d4H7rREou818aJVKNtsqeMsbrLSkI/kuX87Gx39keC/IiX0HMCTu', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-02-18 11:56:10', '2023-02-18 11:56:10', NULL);
 
 -- --------------------------------------------------------
 
@@ -350,7 +429,7 @@ CREATE TABLE `walisantri` (
   `id_user` int UNSIGNED NOT NULL,
   `nis` varchar(10) NOT NULL,
   `id_admin` int UNSIGNED NOT NULL,
-  `nama_santri` varchar(255) NOT NULL,
+  `nama_walisantri` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `jenis_kelamin` varchar(10) NOT NULL,
   `tempat` varchar(15) NOT NULL,
   `tanggal_lahir` date NOT NULL,
@@ -358,13 +437,21 @@ CREATE TABLE `walisantri` (
   `alamat` text NOT NULL,
   `nama_ayah` varchar(25) NOT NULL,
   `nama_ibu` varchar(25) NOT NULL,
-  `nama_wali` varchar(25) NOT NULL,
   `no_telepon` varchar(20) NOT NULL,
   `pekerjaan_ayah` varchar(20) NOT NULL,
   `pekerjaan_ibu` varchar(20) NOT NULL,
   `createdAt` datetime DEFAULT NULL,
   `updatedAt` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `walisantri`
+--
+
+INSERT INTO `walisantri` (`id`, `id_user`, `nis`, `id_admin`, `nama_walisantri`, `jenis_kelamin`, `tempat`, `tanggal_lahir`, `usia_santri`, `alamat`, `nama_ayah`, `nama_ibu`, `no_telepon`, `pekerjaan_ayah`, `pekerjaan_ibu`, `createdAt`, `updatedAt`) VALUES
+(1, 3, '1827493', 3, 'Mahmud Jalaludin', 'Laki-laki', 'Kediri', '2010-06-28', '13', 'Jl. Bersama siapa', 'Badi', 'Bunga', '081273840173', 'Programmer', 'Ibu Rumah Tanggah', '2023-01-28 15:53:53', '2023-01-29 03:32:44'),
+(3, 8, '1827493', 3, 'Eklesia', 'Laki-laki', 'Kediri', '1999-02-28', '23', 'Jl. Sumenep No. 23 Surabaya', 'Eklesia', 'Alvina', '08290194831', 'Karyawan Swasta', 'Karyawan Swasta', '2023-01-30 12:46:18', '2023-01-30 13:36:59'),
+(10, 10, '123343', 3, 'test', 'Laki-laki', 'Kediri', '2000-02-12', '22', 'Kediri, Jawa Timur', 'Ayah', 'Ibu', '08172371293', 'Kerja', 'Kerja', '2023-02-17 18:03:42', '2023-02-17 18:03:42');
 
 --
 -- Indexes for dumped tables
@@ -468,6 +555,14 @@ ALTER TABLE `spp`
   ADD KEY `spp_nis_foreign` (`nis`);
 
 --
+-- Indexes for table `temp_spp`
+--
+ALTER TABLE `temp_spp`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `temp_spp_id_admin_foreign` (`id_admin`),
+  ADD KEY `temp_spp_nis_foreign` (`nis`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -510,7 +605,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -540,25 +635,31 @@ ALTER TABLE `kelas`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `spp`
 --
 ALTER TABLE `spp`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `temp_spp`
+--
+ALTER TABLE `temp_spp`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `walisantri`
 --
 ALTER TABLE `walisantri`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
@@ -616,6 +717,13 @@ ALTER TABLE `santri`
 ALTER TABLE `spp`
   ADD CONSTRAINT `spp_id_admin_foreign` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id_admin`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `spp_nis_foreign` FOREIGN KEY (`nis`) REFERENCES `santri` (`nis`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `temp_spp`
+--
+ALTER TABLE `temp_spp`
+  ADD CONSTRAINT `temp_spp_id_admin_foreign` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id_admin`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `temp_spp_nis_foreign` FOREIGN KEY (`nis`) REFERENCES `santri` (`nis`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `walisantri`
