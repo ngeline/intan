@@ -62,11 +62,19 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="<?= base_url('/user') ?>" class="nav-link <?php if(url_is('user') || url_is('user/*')):?> active <?php endif; ?>">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 User
+              </p>
+            </a>
+          </li> -->
+          <li class="nav-item">
+            <a href="<?= base_url('/laporan') ?>" class="nav-link <?php if(url_is('laporan') || url_is('laporan/*')):?> active <?php endif; ?>">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Laporan
               </p>
             </a>
           </li>

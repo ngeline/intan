@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Spp extends Migration
+class TempSpp extends Migration
 {
     public function up()
     {
@@ -36,7 +36,7 @@ class Spp extends Migration
                 'type'       => 'INT',
                 'constrait'  => '11'
             ],
-            'foto'  => [
+            'foto'          => [
                 'type'      => 'TEXT'
             ],
             'keterangan'    => [
@@ -55,11 +55,11 @@ class Spp extends Migration
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('id_admin', 'admin', 'id_admin', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('nis', 'santri', 'nis', 'CASCADE', 'CASCADE');
-        $this->forge->createTable('spp');
+        $this->forge->createTable('temp_spp');
     }
 
     public function down()
     {
-        $this->forge->dropTable('spp');
+        $this->forge->dropTable('temp_spp');
     }
 }

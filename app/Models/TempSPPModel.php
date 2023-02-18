@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class SPPModel extends Model
+class TempSPPModel extends Model
 {
-    protected $table            = 'spp';
+    protected $table            = 'temp_spp';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
 
@@ -16,7 +16,6 @@ class SPPModel extends Model
         'nama_santri',
         'tanggal',
         'jumlah_iuran',
-        'foto',
         'keterangan',
     ];
 

@@ -92,6 +92,15 @@
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
+                                    <input type='file' name="bukti_pembayaran" id="bukti_pembayaran" class="form-control mb-2"/>
+                                    <img src="<?= base_url('img/default.jpg') ?>" id="preview" src="#" alt="your image" width="200px"/>
+                                    <?php  if(isset($err['bukti_pembayaran'])){  ?>
+                                        <div class="invalid-feedback">
+                                            <?=  $err['bukti_pembayaran']; ?>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                                <div class="form-group">
                                     <button type="submit" class="btn btn-success btn-block">Simpan</button>
                                 </div>
                             </div>
@@ -109,6 +118,11 @@
         <script>
             $(document).ready(function() {
                 $('#jenis_kelamin').select2();
+
+                $("#bukti_pembayaran").change(function() {
+                    readURL(this);
+                });
+
             });
         </script>
     <?= $this->endSection() ?>
