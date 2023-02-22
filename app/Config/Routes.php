@@ -89,7 +89,9 @@ $routes->group('user', static function($routes){
 
 // Laporan
 $routes->group('laporan', static function($routes){
-    $routes->get('/', 'SPP::index', ['filter' => 'role:admin', 'as' => 'laporan']);
+    $routes->get('/', 'Report::index', ['filter' => 'role:admin', 'as' => 'laporan']);
+    $routes->post('report-data-kelas', 'Report::reportKelas', ['filter' => 'role:admin', 'as' => 'laporanKelas']);
+    $routes->post('report-data-spp', 'Report::reportSPP', ['filter' => 'role:admin', 'as' => 'laporanSPP']);
 });
 
 // Profile
