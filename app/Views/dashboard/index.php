@@ -20,6 +20,17 @@
 
     <section class="content">
         <div class="container-fluid">
+            <?php if($role == 2){ ?>
+                <?php if($checkData == null && $checkDataTemp == null){ ?>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert alert-danger" role="alert">
+                                <p class="text-center ">Anda Belum Membayar SPP untuk Bulan Ini!</p>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            <?php } ?>
             <div class="row">
             <div class="col-lg-3 col-6">
                 <!-- small box -->

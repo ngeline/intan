@@ -38,6 +38,7 @@ class SPP extends BaseController
             $data = [
                 'title' => 'SPP',
                 'spp' => $this->sppModel->where('nis', $walisantri['nis'])->findAll(),
+                'sppTemp' =>$this->tempsppModel->where('nis', $walisantri['nis'])->findAll(),
                 'status' => 1,
                 'role' => $u_group['group_id']
             ];

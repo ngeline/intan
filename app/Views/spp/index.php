@@ -71,7 +71,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data SPP</h3>
+                            <h3 class="card-title">Data SPP Terkonfirmasi</h3>
                             <a href="<?= url_to('create.spp') ?>" class="btn btn-success float-right">Tambah Data</a>
                         </div>
                         <!-- /.card-header -->
@@ -136,6 +136,76 @@
                         <!-- /.card-body -->
                     </div>
                 </div>
+                
+                <?php if($role == 2){ ?>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Data SPP Belum Terkonfirmasi</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                        <table id="example2" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>NIS</th>
+                                    <th>Nama Santri</th>
+                                    <th>Tanggal</th>
+                                    <th>Jumlah Iuran</th>
+                                    <th>Keterangan</th>
+                                    <th>Bukti Pembayaran</th>
+                                    <?php if($status == 0) {?>
+                                    <th>Action</th>
+                                    <?php }?>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php  
+                                $no = 1;
+                                foreach($sppTemp as $data): ?>
+                                <tr>
+                                    <th scope="row"><?= $no++ ?></th>
+                                    <td><?= $data['nis'] ?></td>
+                                    <td><?= $data['nama_santri'] ?></td>
+                                    <td><?= $data['tanggal'] ?></td>
+                                    <td><?= $data['jumlah_iuran'] ?></td>
+                                    <td><?= $data['keterangan'] ?></td>
+                                    <td><img src="<?= ($data['foto'] != null) ? base_url('img/'.$data['foto']) : base_url('img/default.jpg') ?>" alt="" width="150"></td>
+                                    <?php if($status == 0) {?>
+                                    <td>
+                                            <a href="<?= url_to('edit.spp', $data['id']) ?>" class="btn btn-sm btn-success">Detail</a>
+                                                <button type="button" class="btn btn-sm btn-warning" onclick="konfirmasi(<?= $data['id'] ?>)">Konfirmasi</button>
+                                            <form action="<?= url_to('delete.spp', $data['id']) ?>" method="post" class="d-inline">
+                                                <?= csrf_field(); ?>
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Anda Yakin Menghapus Data Ini?')">Delete</button>
+                                            </form>
+                                        </td>
+                                    <?php }?>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>No</th>
+                                    <th>NIS</th>
+                                    <th>Nama Santri</th>
+                                    <th>Tanggal</th>
+                                    <th>Jumlah Iuran</th>
+                                    <th>Keterangan</th>
+                                    <th>Bukti Pembayaran</th>
+                                    <?php if($status == 0) {?>
+                                    <th>Action</th>
+                                    <?php }?>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <?php }?>
             </div>
         </div>
     </section>

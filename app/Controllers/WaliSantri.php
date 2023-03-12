@@ -129,23 +129,27 @@ class WaliSantri extends BaseController
 
         $checkUser = $this->user->where('username', $this->request->getVar('nama_walisantri'))->get();
         if(!$checkUser){
+            $namawalisantri = str_replace(' ', '', $this->request->getVar('nama_walisantri'));
             $this->user->save([
-                'email'     => $this->request->getVar('nama_walisantri').'@gmail.com',
-                'username'  => $this->request->getVar('nama_walisantri'),
-                'password_hash'  => Password::hash('walisantri')
+                'email'     => $namawalisantri.'@gmail.com',
+                'username'  => $namawalisantri,
+                'password_hash'  => Password::hash('walisantri'),
+                'active'    => 1
             ]);
         }else{
             $checkUser = $checkUser->getResultArray();
             $countUser = count($checkUser);
             $countUser += 1;
             $this->user->save([
-                'email'     => $this->request->getVar('nama_walisantri').''.$countUser.'@gmail.com',
-                'username'  => $this->request->getVar('nama_walisantri').''.$countUser,
-                'password_hash'  => Password::hash('walisantri')
+                'email'     => $namawalisantri.''.$countUser.'@gmail.com',
+                'username'  => $namawalisantri.''.$countUser,
+                'password_hash'  => Password::hash('walisantri'),
+                'active'    => 1
             ]);
         }
 
-        $user = $this->user->where('email', $this->request->getVar('nama_walisantri').'@gmail.com')->first();
+        // $user = $this->user->where('email', $this->request->getVar('nama_walisantri').'@gmail.com')->first();
+        $user = $this->user->orderBy('id', 'DESC')->first();
 
         $u_group = [
             'group_id'  => '2',
@@ -281,10 +285,11 @@ class WaliSantri extends BaseController
             session()->setFlashdata('error-header', 'Failed to edit data!');
             return redirect()->back()->withInput()->with('error', $this->validation->getErrors());
         };
+        $namawalisantri = str_replace(' ', '', $this->request->getVar('nama_walisantri'));
 
         $this->user->update($walisantri['id_user'], [
-            'email'     => $this->request->getVar('nama_walisantri').'@gmail.com',
-            'username'  => $this->request->getVar('nama_walisantri')
+            'email'     => $namawalisantri.'@gmail.com',
+            'username'  => $namawalisantri
         ]);
 
         $this->walisantriModel->update($id, [

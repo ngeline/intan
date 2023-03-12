@@ -113,9 +113,19 @@
     </section>
 </div>
 <?= $this->endSection() ?>
-<?php if($u_group['group_id'] == 1){?>
+<?php if($u_group['group_id'] == 1 || $u_group['group_id'] == 2){?>
     <?= $this->section('footer') ?>
         <script>
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#preview').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            
             $(document).ready(function() {
                 $('#jenis_kelamin').select2();
 

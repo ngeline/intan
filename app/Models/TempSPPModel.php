@@ -16,6 +16,7 @@ class TempSPPModel extends Model
         'nama_santri',
         'tanggal',
         'jumlah_iuran',
+        'foto',
         'keterangan',
     ];
 
