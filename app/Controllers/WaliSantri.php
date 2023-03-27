@@ -128,8 +128,8 @@ class WaliSantri extends BaseController
         };
 
         $checkUser = $this->user->where('username', $this->request->getVar('nama_walisantri'))->get();
+        $namawalisantri = str_replace(' ', '', $this->request->getVar('nama_walisantri'));
         if(!$checkUser){
-            $namawalisantri = str_replace(' ', '', $this->request->getVar('nama_walisantri'));
             $this->user->save([
                 'email'     => $namawalisantri.'@gmail.com',
                 'username'  => $namawalisantri,
