@@ -58,7 +58,7 @@ class SPP extends BaseController
                 "SELECT * FROM temp_spp
                 WHERE tanggal >= $fromDate OR tanggal <= $toDate"
             )->getResultArray();
-        }else{
+        }else{ 
             $spp = $this->db->query(
                 "SELECT * FROM spp
                 WHERE tanggal >= $fromDate OR tanggal <= $toDate"
@@ -272,11 +272,36 @@ class SPP extends BaseController
                 'tanggal'           => $spp['tanggal'],
                 'jumlah_iuran'      => $spp['jumlah_iuran'],
                 'foto'              => $spp['foto'],
-                'keterangan'        => $spp['keterangan']
+                'keterangan'        => $spp['keterangan'],
+                'status'            => 1
             ]);
 
             $this->tempsppModel->delete($id);
-            session()->setFlashdata('success-warning', 'Berhasil Konfirmasi Data!');
+            session()->setFlashdata('success', 'Berhasil Konfirmasi Data!');
+            return redirect()->to(url_to('spp'));
+        }else{
+            session()->setFlashdata('error', 'Gagal Konfirmasi Data! Mungkin data sudah terkonfirmasi! silahkan reflesh page!');
+            return redirect()->to(url_to('spp'));
+        }
+    }
+
+    public function tolak($id)
+    {
+        $spp = $this->tempsppModel->find($id);
+        if($spp){
+            $this->sppModel->save([
+                'id_admin'          => $spp['id_admin'],
+                'nis'               => $spp['nis'],
+                'nama_santri'       => $spp['nama_santri'],
+                'tanggal'           => $spp['tanggal'],
+                'jumlah_iuran'      => $spp['jumlah_iuran'],
+                'foto'              => $spp['foto'],
+                'keterangan'        => $spp['keterangan'],
+                'status'            => 0
+            ]);
+
+            $this->tempsppModel->delete($id);
+            session()->setFlashdata('success', 'Berhasil Konfirmasi Data!');
             return redirect()->to(url_to('spp'));
         }else{
             session()->setFlashdata('error', 'Gagal Konfirmasi Data! Mungkin data sudah terkonfirmasi! silahkan reflesh page!');

@@ -48,6 +48,7 @@
                                     <th>ID</th>
                                     <th>NIS | Nama Santri</th>
                                     <th>Nama Wali Santri</th>
+                                    <th>Email Wali Santri</th>
                                     <th>TTL</th>
                                     <th>Usia Santri</th>
                                     <th>Alamat</th>
@@ -63,6 +64,7 @@
                                     <th scope="row"><?= $no++ ?></th>
                                     <td><?= $data['nis'].' | '.$data['nama_santri'] ?></td>
                                     <td><?= $data['nama_walisantri'] ?></td>
+                                    <td><?= $data['email'] ?></td>
                                     <td><?= $data['tempat'].', '.$data['tanggal_lahir'] ?></td>
                                     <td><?= $data['usia_santri'].' Tahun' ?></td>
                                     <td><?= $data['alamat'] ?></td>

@@ -78,6 +78,7 @@ $routes->group('sumbangan-pembinaan-pendidikan', static function($routes){
     //search
     $routes->post('', 'SPP::search', ['filter' => 'role:admin,wali santri', 'as' => 'spp.search']);
     $routes->get('konfirmasi/(:num)', 'SPP::konfirmasi/$1', ['filter' => 'role:admin,wali santri', 'as' => 'konfirmasi.spp']);
+    $routes->get('tolak/(:num)', 'SPP::tolak/$1', ['filter' => 'role:admin,wali santri', 'as' => 'tolak.spp']);
 });
 
 // User

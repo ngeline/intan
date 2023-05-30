@@ -86,9 +86,7 @@
                                     <th>Jumlah Iuran</th>
                                     <th>Keterangan</th>
                                     <th>Bukti Pembayaran</th>
-                                    <?php if($status == 0) {?>
-                                    <th>Action</th>
-                                    <?php }?>
+                                    <th >Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -103,17 +101,24 @@
                                     <td><?= $data['jumlah_iuran'] ?></td>
                                     <td><?= $data['keterangan'] ?></td>
                                     <td><img src="<?= ($data['foto'] != null) ? base_url('img/'.$data['foto']) : base_url('img/default.jpg') ?>" alt="" width="150"></td>
-                                    <?php if($status == 0) {?>
                                     <td>
-                                            <a href="<?= url_to('edit.spp', $data['id']) ?>" class="btn btn-sm btn-success">Detail</a>
-                                                <button type="button" class="btn btn-sm btn-warning" onclick="konfirmasi(<?= $data['id'] ?>)">Konfirmasi</button>
-                                            <form action="<?= url_to('delete.spp', $data['id']) ?>" method="post" class="d-inline">
-                                                <?= csrf_field(); ?>
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Anda Yakin Menghapus Data Ini?')">Delete</button>
-                                            </form>
-                                        </td>
+                                    <?php if($status == 0) {?>
+                                        <a href="<?= url_to('edit.spp', $data['id']) ?>" class="btn btn-sm btn-success">Detail</a>
+                                        <form action="<?= url_to('delete.spp', $data['id']) ?>" method="post" class="d-inline">
+                                            <?= csrf_field(); ?>
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Anda Yakin Menghapus Data Ini?')">Delete</button>
+                                        </form>
+                                        <button type="button" class="btn btn-sm btn-primary" onclick="konfirmasi(<?= $data['id'] ?>)">Konfirmasi</button>
+                                        <button type="button" class="btn btn-sm btn-warning" onclick="tolak(<?= $data['id'] ?>)">Tolak</button>
+                                    <?php }else{?>
+                                        <?php if($data['status'] == 1) {?>
+                                            <button class="btn btn-success" disabled>Terkonfirmasi</button>
+                                        <?php }else{?>
+                                            <button class="btn btn-danger" disabled>Ditolak</button>
+                                        <?php }?>
                                     <?php }?>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>
@@ -126,9 +131,7 @@
                                     <th>Jumlah Iuran</th>
                                     <th>Keterangan</th>
                                     <th>Bukti Pembayaran</th>
-                                    <?php if($status == 0) {?>
                                     <th>Action</th>
-                                    <?php }?>
                                 </tr>
                             </tfoot>
                         </table>
@@ -218,6 +221,12 @@
             var konfirm = confirm('Anda Yakin Konfirmasi SPP Ini?')
             if(konfirm == true){
                 window.location = '<?= site_url('/sumbangan-pembinaan-pendidikan/konfirmasi') ?>/'+id
+            }
+        }
+        function tolak(id){
+            var konfirm = confirm('Anda Yakin Tolak SPP Ini?')
+            if(konfirm == true){
+                window.location = '<?= site_url('/sumbangan-pembinaan-pendidikan/tolak') ?>/'+id
             }
         }
     </script>

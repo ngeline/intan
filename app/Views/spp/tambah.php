@@ -92,7 +92,7 @@
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
-                                    <input type='file' name="bukti_pembayaran" id="bukti_pembayaran" class="form-control mb-2"/>
+                                    <input type='file' name="bukti_pembayaran" id="bukti_pembayaran" class="form-control  mb-2" required />
                                     <img src="<?= base_url('img/default.jpg') ?>" id="preview" src="#" alt="your image" width="200px"/>
                                     <?php  if(isset($err['bukti_pembayaran'])){  ?>
                                         <div class="invalid-feedback">

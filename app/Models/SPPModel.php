@@ -18,6 +18,7 @@ class SPPModel extends Model
         'jumlah_iuran',
         'foto',
         'keterangan',
+        'status'
     ];
 
     // Dates
